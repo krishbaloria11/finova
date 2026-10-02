@@ -582,7 +582,7 @@ When presenting this project during a college viva or evaluation, use these key 
 
 ### ☁️ Run Instantly in GitHub Codespaces (No Setup Required)
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/krishbaloria11/finovadbms?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/krishbaloria11/finova?quickstart=1)
 
 > Click the button above to launch a fully configured cloud development environment — no local installation needed!
 
