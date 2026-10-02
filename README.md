@@ -575,3 +575,46 @@ When presenting this project during a college viva or evaluation, use these key 
    *The frontend single-page application uses `fetch()` in `api.js` to dispatch JSON requests with an `Authorization: Token <token>` header. DRF decodes the token, authenticates the user, checks permissions, and responds with JSON.*
 5. **How is Customer Data Isolation enforced?**
    *Data isolation is enforced strictly on the server in Django QuerySets (e.g., `Account.objects.filter(customer=request.user.customer)`). Even if a customer inspects DOM elements or alters frontend JS, the backend rejects unauthorized access with HTTP 403/404.*
+
+   ---
+
+## 🚀 Quick Run
+
+### ☁️ Run Instantly in GitHub Codespaces (No Setup Required)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/krishbaloria11/finovadbms?quickstart=1)
+
+> Click the button above to launch a fully configured cloud development environment — no local installation needed!
+
+### 💻 Run Locally (Clone & Go)
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/krishbaloria11/finova.git
+cd finova
+
+# 2. Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate        # macOS / Linux
+# .venv\Scripts\activate         # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Set up the database & seed demo data
+cd backend
+python manage.py migrate
+python manage.py seed_demo_data
+
+# 5. Start the server
+python manage.py runserver
+```
+
+Then open **http://127.0.0.1:8000** in your browser and use the demo credentials from [`DEMO_CREDENTIALS.md`](DEMO_CREDENTIALS.md) to log in.
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/krishbaloria11">krishbaloria11</a>
+</p>
+
