@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_dashboard" name="shell-type"/>
+  <title>Finova - Silk &amp; Glass Banking and Loan Management System</title>
+  
+  <!-- Typography & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 8px 32px -4px rgba(15, 23, 42, 0.04), 0 2px 8px -2px rgba(15, 23, 42, 0.02);
+    }
+    .glass-card-elevated {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 20px 48px -12px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+    }
+  </style>
+
+  <!-- Tailwind CSS with Finova Silk & Glass Design System Tokens -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary": "#6b3700",
+            "on-tertiary": "#ffffff",
+            "outline-variant": "#c4c5d7",
+            "surface": "#faf8ff",
+            "secondary-container": "#82f5c1",
+            "error": "#ba1a1a",
+            "surface-container-high": "#e2e7ff",
+            "tertiary-container": "#8d4b00",
+            "on-secondary-fixed": "#002114",
+            "on-tertiary-container": "#ffcba3",
+            "primary-fixed": "#dce1ff",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "on-primary-container": "#cad3ff",
+            "tertiary-fixed-dim": "#ffb77d",
+            "secondary-fixed": "#85f8c4",
+            "surface-container-highest": "#dae2fd",
+            "on-secondary-container": "#00714e",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#434655",
+            "surface-container": "#eaedff",
+            "on-secondary": "#ffffff",
+            "outline": "#747686",
+            "inverse-on-surface": "#eef0ff",
+            "on-error-container": "#93000a",
+            "surface-bright": "#faf8ff",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-secondary-fixed-variant": "#005137",
+            "surface-tint": "#2151da",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-tertiary-fixed": "#2f1500",
+            "on-primary": "#ffffff",
+            "background": "#faf8ff",
+            "on-background": "#131b2e",
+            "inverse-primary": "#b7c4ff",
+            "surface-container-low": "#f2f3ff",
+            "secondary-fixed-dim": "#68dba9",
+            "primary": "#0037b0",
+            "on-surface": "#131b2e",
+            "tertiary-fixed": "#ffdcc3",
+            "secondary": "#006c4a",
+            "primary-container": "#1d4ed8",
+            "on-primary-fixed": "#001551",
+            "surface-dim": "#d2d9f4",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "inverse-surface": "#283044",
+            "surface-variant": "#dae2fd"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "margin": "3rem",
+            "margin-mobile": "1.25rem"
+          },
+          fontFamily: {
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "financial-numeric": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "headline-sm": ["20px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "display-lg": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "700" }],
+            "body-lg": ["18px", { lineHeight: "28px", letterSpacing: "-0.005em", fontWeight: "400" }],
+            "body-md": ["15px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "400" }],
+            "body-sm": ["13px", { lineHeight: "20px", letterSpacing: "0.005em", fontWeight: "400" }],
+            "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+            "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "financial-numeric": ["32px", { lineHeight: "38px", letterSpacing: "-0.02em", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased">
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest/90 backdrop-blur-xl border-r border-outline-variant/30 z-50 flex flex-col justify-between select-none">
+    <div class="flex flex-col flex-1 overflow-y-auto">
+      
+      <!-- Brand Logo Header -->
+      <div class="h-16 px-space-lg flex items-center gap-space-sm border-b border-outline-variant/20">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-white font-bold text-base shadow-sm">
+            <span class="material-symbols-outlined text-[20px]">account_balance</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-headline-sm text-[18px] font-bold tracking-tight text-on-surface leading-none">Finova</span>
+            <span class="font-label-sm text-[10px] uppercase tracking-wider text-outline font-semibold leading-tight pt-0.5">Banking made simple</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Links Container -->
+      <nav class="px-space-md py-space-md flex flex-col gap-space-lg">
+        
+        <!-- CUSTOMER GROUP -->
+        <div id="nav-customer-group" class="flex flex-col gap-space-lg">
+          <!-- Core Banking -->
+          <div class="flex flex-col gap-1">
+            <span class="px-space-sm pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline font-medium">Core Banking</span>
+            <a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg transition-colors bg-surface-container-low text-primary-container font-semibold" data-path="dashboard" href="#dashboard">
+              <span class="material-symbols-outlined text-[20px]">grid_view</span>
+              <span>Dashboard</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="accounts" href="#accounts">
+              <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+              <span>Accounts</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="transactions" href="#transactions">
+              <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+              <span>Transactions</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="transfer-and-pay" href="#transfer-and-pay">
+              <span class="material-symbols-outlined text-[20px]">sync_alt</span>
+              <span>Transfer &amp; Pay</span>
+            </a>
+          </div>
+
+          <!-- Credit & Loans -->
+          <div class="flex flex-col gap-1">
+            <span class="px-space-sm pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline font-medium">Credit &amp; Loans</span>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="loans-overview" href="#loans-overview">
+              <span class="material-symbols-outlined text-[20px]">credit_score</span>
+              <span>Loans Overview</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="apply-for-credit" href="#apply-for-credit">
+              <span class="material-symbols-outlined text-[20px]">add_card</span>
+              <span>Apply for Credit</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="pay-emi" href="#pay-emi">
+              <span class="material-symbols-outlined text-[20px]">payments</span>
+              <span>Pay EMI</span>
+            </a>
+          </div>
+
+          <!-- Settings & Help -->
+          <div class="flex flex-col gap-1">
+            <span class="px-space-sm pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline font-medium">Settings &amp; Help</span>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="notifications" href="#notifications">
+              <span class="material-symbols-outlined text-[20px]">notifications</span>
+              <span>Notifications</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="security-and-profile" href="#security-and-profile">
+              <span class="material-symbols-outlined text-[20px]">shield_person</span>
+              <span>Security &amp; Profile</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="support" href="#support">
+              <span class="material-symbols-outlined text-[20px]">help_outline</span>
+              <span>Support</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- EMPLOYEE NAVIGATION GROUP (Hidden by default) -->
+        <div id="nav-employee-group" class="hidden flex flex-col gap-space-lg">
+          <div class="flex flex-col gap-1">
+            <span class="px-space-sm pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline font-medium">Underwriting &amp; Ops</span>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg transition-colors bg-surface-container-low text-primary-container font-semibold employee-nav-item" data-path="employee-portal" data-employee-tab="loans" href="#employee-portal">
+              <span class="material-symbols-outlined text-[20px]">rate_review</span>
+              <span>Loan Applications</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors employee-nav-item" data-path="employee-portal" data-employee-tab="kyc" href="#employee-portal">
+              <span class="material-symbols-outlined text-[20px]">verified_user</span>
+              <span>KYC Verification</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors employee-nav-item" data-path="employee-portal" data-employee-tab="customers" href="#employee-portal">
+              <span class="material-symbols-outlined text-[20px]">person_search</span>
+              <span>Customer Lookup</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors employee-nav-item" data-path="employee-portal" data-employee-tab="ledger" href="#employee-portal">
+              <span class="material-symbols-outlined text-[20px]">monitoring</span>
+              <span>Ledger Monitor</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- ADMIN NAVIGATION GROUP (Hidden by default) -->
+        <div id="nav-admin-group" class="hidden flex flex-col gap-space-lg">
+          <div class="flex flex-col gap-1">
+            <span class="px-space-sm pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline font-medium">Management &amp; Audit</span>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg transition-colors bg-surface-container-low text-primary-container font-semibold admin-nav-item" data-path="admin-portal" data-admin-tab="metrics" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">analytics</span>
+              <span>System Metrics</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="customers" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">people</span>
+              <span>Customers Directory</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="accounts" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">manage_accounts</span>
+              <span>Customer Accounts</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="transactions" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+              <span>Transaction Oversight</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="loans" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">real_estate_agent</span>
+              <span>Credit Facilities</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="kyc" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">verified_user</span>
+              <span>KYC Oversight</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="employees" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">badge</span>
+              <span>Staff Workload</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="branches" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">hub</span>
+              <span>Branch Facilities</span>
+            </a>
+            <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors admin-nav-item" data-path="admin-portal" data-admin-tab="audit" href="#admin-portal">
+              <span class="material-symbols-outlined text-[20px]">history_edu</span>
+              <span>Audit Logs</span>
+            </a>
+          </div>
+        </div>
+
+
+      </nav>
+    </div>
+
+    <!-- Sidebar Bottom Profile & Sign Out -->
+    <div class="p-space-md border-t border-outline-variant/20 flex flex-col gap-space-sm">
+      <div class="px-space-sm">
+        <p id="sidebar-user-name" class="font-label-md text-label-md font-semibold text-on-surface">Sophia Mehta</p>
+        <p class="font-label-sm text-label-sm text-outline">Last login today at 9:42 AM</p>
+      </div>
+      <button id="btn-sidebar-signout" class="w-full flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-error-container/40 hover:text-error transition-colors text-left" type="button">
+        <span class="material-symbols-outlined text-[20px]">logout</span>
+        <span>Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN APP CONTAINER -->
+  <div class="pl-64 flex flex-col min-h-screen">
+    
+    <!-- TOP FIXED HEADER -->
+    <header class="fixed top-0 left-64 right-0 h-16 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/20 z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+      
+      <!-- Search Input -->
+      <div class="flex-1 max-w-md">
+        <div class="relative flex items-center w-full">
+          <span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">search</span>
+          <input id="header-global-search" class="w-full h-10 pl-10 pr-4 rounded-lg bg-surface-container-lowest/80 border border-outline-variant/40 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:bg-surface-container-lowest transition-all" placeholder="Search accounts, UPI IDs, or transactions..." type="text"/>
+        </div>
+      </div>
+
+      <!-- Header Controls: Currency, Role Demo Selector, Notifications, Profile -->
+      <div class="flex items-center gap-space-md">
+        
+        <!-- Currency Pill -->
+        <div class="flex items-center bg-surface-container-lowest rounded-lg border border-outline-variant/40 px-2.5 py-1">
+          <span class="font-label-sm text-label-sm text-on-surface font-semibold">INR (₹)</span>
+          <span class="material-symbols-outlined text-outline text-[18px] ml-1">expand_more</span>
+        </div>
+
+        <!-- College Demo Role Switcher Pill -->
+        <div class="flex items-center gap-1.5 bg-primary-container/10 border border-primary-container/30 rounded-lg px-2.5 py-1">
+          <span class="material-symbols-outlined text-primary-container text-[16px]">switch_account</span>
+          <select id="demo-role-selector" class="bg-transparent border-none text-primary-container font-label-sm text-label-sm font-semibold p-0 focus:ring-0 cursor-pointer">
+            <optgroup label="Customers (5)">
+              <option value="sophia">Sophia Mehta (Premier · ₹1.28L)</option>
+              <option value="rohan">Rohan Deshmukh (Retail · ₹35.1K)</option>
+              <option value="aarav">Aarav Sharma (Premier · ₹2.40L)</option>
+              <option value="priya">Priya Patel (Salaried · ₹64.2K)</option>
+              <option value="vikram">Vikram Malhotra (Business · ₹1.04L)</option>
+            </optgroup>
+            <optgroup label="Bank Employees (2)">
+              <option value="employee">Ramesh Iyer (Sr. Underwriter · BLR)</option>
+              <option value="employee2">Ananya Rao (KYC Officer · MUM)</option>
+            </optgroup>
+            <optgroup label="System Admin (1)">
+              <option value="admin">System Admin (DBMS Manager)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Notification Bell -->
+        <button class="btn-bell-notifications relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button" title="View Notifications">
+          <span class="material-symbols-outlined text-[22px]">notifications</span>
+          <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container ring-2 ring-surface"></span>
+        </button>
+
+        <div class="h-6 w-px bg-outline-variant/30"></div>
+
+        <!-- User Profile Pill -->
+        <div class="flex items-center gap-space-sm pl-1 cursor-pointer" onclick="navigateTo('security-and-profile')">
+          <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" src="https://lh3.googleusercontent.com/aida/AEtjO1Wia4MnDsCr7NbWxLIWoj4s1UDwkybMRdJG_NQuA1fYhK6u0DgFrVupmfr_CrFY1g6UunCmVBxR2t4jZB_nZGPG4-wOjDCpI39cMxPwJT3yR6LpNu2MLTY4iCagDJWzvjIqGQlYl3SpS4klpYnmHe3v6FRoeFzyH4c6dHZW7tv9eskIOb_nGWIn3J6EaR_UeCZVK3zfux3tTHIZHtcw8LTe5lWVzrwpDymKocJvrqWvReX0rJwTnQTs7g"/>
+          <div class="flex flex-col text-left">
+            <span id="header-user-name" class="font-label-md text-label-md font-medium text-on-surface leading-tight">Sophia Mehta</span>
+            <span id="header-user-sub" class="font-label-sm text-label-sm text-outline leading-tight">Finova Premier Banking</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="relative pt-16 bg-surface flex-1 w-full px-space-lg">
+      
+      <!-- ======================================================== -->
+      <!-- VIEW 1: CUSTOMER DASHBOARD (EXACT STITCH PROTOTYPE)       -->
+      <!-- ======================================================== -->
+      <div id="view-dashboard" class="app-view flex flex-col w-full pb-16">
+        
+        <!-- TOP EDITORIAL HEADER & BALANCE HERO -->
+        <section class="w-full pt-6 pb-8 border-b border-outline-variant/30">
+          <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 max-w-[1400px]">
+            
+            <!-- Left: Balance & Quick Human Actions -->
+            <div class="flex flex-col space-y-3">
+              <div class="flex items-center gap-2">
+                <span id="dashboard-user-greeting" class="font-label-md text-label-md text-on-surface-variant font-normal">Good morning, Sophia</span>
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                <span class="font-label-sm text-label-sm text-outline">Last updated just now · RBI Regulated · DICGC Insured up to ₹5,00,000</span>
+              </div>
+              <div class="space-y-1">
+                <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-medium">Total available balance</span>
+                <div class="flex items-baseline gap-3">
+                  <h1 id="dashboard-total-balance" class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">₹1,28,450.80</h1>
+                  <span id="dashboard-balance-growth" class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary font-medium">
+                    <span class="material-symbols-outlined text-[16px]">trending_up</span>
+                    <span>+₹3,420.50 (2.7%) this month</span>
+                  </span>
+                </div>
+                <p id="dashboard-accounts-caption" class="font-body-sm text-body-sm text-outline">Across 3 accounts · Salary deposit expected Friday, Nov 14</p>
+              </div>
+
+              <!-- Human Action Buttons -->
+              <div class="pt-2 flex flex-wrap items-center gap-2.5">
+                <button class="btn-quick-transfer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-medium shadow-sm hover:bg-primary transition-all duration-150 active:scale-[0.99]" type="button">
+                  <span>Transfer money</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+                <button class="btn-quick-transfer inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md font-medium shadow-sm hover:bg-surface-container transition-all duration-150" type="button">
+                  <span class="material-symbols-outlined text-[18px] text-outline">qr_code_scanner</span>
+                  <span>Scan &amp; Pay UPI</span>
+                </button>
+                <button class="btn-quick-pay-emi inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md font-medium shadow-sm hover:bg-surface-container transition-all duration-150" type="button">
+                  <span class="material-symbols-outlined text-[18px] text-outline">payments</span>
+                  <span>Pay bill / EMI</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Action Required Banner & Credit Score Strip -->
+            <div class="flex flex-col sm:flex-row lg:flex-col gap-3 min-w-[320px] max-w-md lg:w-96">
+              
+              <!-- Attention Box -->
+              <div id="dashboard-alert-banner" class="p-4 rounded-xl bg-amber-500/10 border-l-4 border-amber-600 shadow-sm flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5 text-amber-900">
+                    <span class="material-symbols-outlined text-[18px]">schedule</span>
+                    <span id="dashboard-alert-title" class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Payment Due in 5 Days</span>
+                  </div>
+                  <span id="dashboard-alert-amount" class="font-label-sm text-label-sm text-amber-900 font-semibold">₹28,500.00</span>
+                </div>
+                <p id="dashboard-alert-text" class="font-body-sm text-body-sm text-amber-950">
+                  Home Loan EMI auto-debit from <strong>Savings •••• 4821</strong> on Sat, Nov 15.
+                </p>
+                <div class="flex items-center justify-between pt-1">
+                  <a class="font-label-sm text-label-sm font-semibold text-amber-950 hover:underline inline-flex items-center gap-0.5" href="#pay-emi" onclick="navigateTo('pay-emi')">
+                    <span>Manage Payment</span>
+                    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                  </a>
+                  <span class="font-label-sm text-label-sm text-amber-800">Auto-clearing enabled</span>
+                </div>
+              </div>
+
+              <!-- Credit Score Strip -->
+              <div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container">
+                    <span class="material-symbols-outlined text-[20px]">verified_user</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-1.5">
+                      <span id="dashboard-credit-score" class="font-label-md text-label-md font-semibold text-on-surface">Credit Score: 785 / 900</span>
+                      <span id="dashboard-credit-category" class="font-label-sm text-label-sm text-secondary font-medium">Excellent</span>
+                    </div>
+                    <span id="dashboard-credit-date" class="font-label-sm text-label-sm text-outline">CIBIL model · Updated Nov 01</span>
+                  </div>
+                </div>
+                <a class="font-label-sm text-label-sm font-medium text-primary-container hover:underline" href="#loans-overview" onclick="navigateTo('loans-overview')">View Report</a>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- MIDDLE SECTION: ASYMMETRICAL EDITORIAL GRID (7fr / 5fr) -->
+        <section class="w-full pt-8 max-w-[1400px]">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT COLUMN: PRIMARY ACCOUNT, FLAT ACCOUNTS LIST, CASHFLOW (7 cols) -->
+            <div class="lg:col-span-7 flex flex-col space-y-7">
+              
+              <!-- Primary Account Frosted Glass Card -->
+              <div class="relative overflow-hidden rounded-2xl bg-surface-container-lowest/80 backdrop-blur-xl p-6 sm:p-7 shadow-md border border-outline-variant/30">
+                <div class="absolute -right-16 -top-16 w-52 h-52 bg-gradient-to-br from-primary-fixed/40 to-transparent rounded-full blur-2xl pointer-events-none"></div>
+                <div class="relative z-10 flex flex-col space-y-6">
+                  <div class="flex items-start justify-between">
+                    <div class="flex flex-col">
+                      <div class="flex items-center gap-2">
+                        <span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline">PRIMARY SAVINGS ACCOUNT</span>
+                        <span id="primary-acc-badge" class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold">Active</span>
+                      </div>
+                      <h3 id="primary-acc-title" class="font-headline-sm text-headline-sm text-on-surface font-semibold pt-0.5">Primary Savings •••• 4821</h3>
+                    </div>
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant font-medium">
+                      <span class="material-symbols-outlined text-[16px] text-primary-container">contactless</span>
+                      <span id="primary-acc-scheme">RuPay Platinum</span>
+                    </div>
+                  </div>
+
+                  <!-- Balances Detail Grid -->
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-1">
+                    <div>
+                      <p class="font-label-sm text-label-sm text-outline">Available Balance</p>
+                      <p id="primary-acc-available" class="font-financial-numeric text-financial-numeric font-bold text-on-surface tracking-tight pt-0.5">₹42,650.30</p>
+                    </div>
+                    <div>
+                      <p class="font-label-sm text-label-sm text-outline">Ledger Balance</p>
+                      <p id="primary-acc-ledger" class="font-headline-sm text-headline-sm font-semibold text-on-surface-variant pt-2">₹43,100.00</p>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                      <p class="font-label-sm text-label-sm text-outline">IFSC Code</p>
+                      <p id="primary-acc-ifsc" class="font-body-sm text-body-sm font-medium text-on-surface-variant pt-2.5">FINO0001234</p>
+                    </div>
+                  </div>
+
+                  <!-- Quick Inline Operations -->
+                  <div class="pt-2 flex flex-wrap items-center gap-3">
+                    <button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-medium hover:bg-surface-container-highest transition-colors" type="button" onclick="navigateTo('accounts')">
+                      <span class="material-symbols-outlined text-[17px] text-primary-container">download</span>
+                      <span>View Statement</span>
+                    </button>
+                    <button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium hover:text-on-surface transition-colors" type="button" onclick="navigateTo('accounts')">
+                      <span class="material-symbols-outlined text-[17px]">credit_card</span>
+                      <span>Account Details</span>
+                    </button>
+                    <button class="btn-quick-transfer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium hover:text-on-surface transition-colors" type="button">
+                      <span class="material-symbols-outlined text-[17px]">send</span>
+                      <span>Transfer Money</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Flat List of Secondary Accounts -->
+              <div class="flex flex-col space-y-2">
+                <div class="flex items-center justify-between pb-1">
+                  <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Other Accounts</span>
+                  <a class="font-label-sm text-label-sm text-primary-container hover:underline font-medium" href="#accounts" onclick="navigateTo('accounts')">+ Link Another Account</a>
+                </div>
+
+                <div id="dashboard-other-accounts-container" class="space-y-2">
+                </div>
+              </div>
+
+              <!-- Cashflow & Trajectory Card -->
+              <div class="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm flex flex-col space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <h4 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Monthly Cash Flow</h4>
+                    <p class="font-body-sm text-body-sm text-outline">Real-time spend pacing vs monthly income credits</p>
+                  </div>
+                  <div class="inline-flex p-1 rounded-xl bg-surface-container gap-1 self-start sm:self-auto">
+                    <button class="cashflow-tf-btn px-3 py-1 rounded-lg text-outline hover:text-on-surface font-label-sm text-label-sm font-medium transition-colors" type="button" data-days="7">7 Days</button>
+                    <button class="cashflow-tf-btn px-3 py-1 rounded-lg bg-surface-container-lowest shadow-sm text-on-surface font-label-sm text-label-sm font-semibold transition-colors" type="button" data-days="30">30 Days</button>
+                    <button class="cashflow-tf-btn px-3 py-1 rounded-lg text-outline hover:text-on-surface font-label-sm text-label-sm font-medium transition-colors" type="button" data-days="90">90 Days</button>
+                  </div>
+                </div>
+
+                <!-- Cashflow Metrics -->
+                <div class="grid grid-cols-3 gap-3 p-3.5 rounded-xl bg-surface-container-low">
+                  <div>
+                    <span class="font-label-sm text-label-sm text-outline">Total Inflow</span>
+                    <p id="dashboard-cashflow-income" class="font-headline-sm text-headline-sm font-semibold text-secondary pt-0.5">₹0.00</p>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-outline">Total Outflow</span>
+                    <p id="dashboard-cashflow-expenses" class="font-headline-sm text-headline-sm font-semibold text-on-surface pt-0.5">₹0.00</p>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-outline">Net Savings</span>
+                    <p id="dashboard-cashflow-savings" class="font-headline-sm text-headline-sm font-semibold text-primary-container pt-0.5">₹0.00</p>
+                  </div>
+                </div>
+
+                <!-- Dynamic SVG Line Graph & Trajectory Container -->
+                <div id="dashboard-cashflow-chart-container" class="relative w-full h-48 flex flex-col justify-end pt-2">
+                  <!-- Tooltip container -->
+                  <div id="dashboard-cashflow-tooltip" class="absolute hidden z-30 pointer-events-none bg-surface-container-lowest/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg border border-outline-variant/30 text-[12px] font-mono text-on-surface transition-all"></div>
+                  
+                  <!-- Empty State (Shown if no txns in timeframe) -->
+                  <div id="dashboard-cashflow-empty" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-surface-container-low/40 rounded-xl">
+                    <span class="material-symbols-outlined text-[28px] text-outline mb-1">show_chart</span>
+                    <p class="font-label-sm text-outline">No transaction activity recorded in this time-window.</p>
+                  </div>
+
+                  <!-- Dynamic SVG Canvas -->
+                  <svg id="dashboard-cashflow-svg" class="w-full h-36 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 500 130">
+                    <defs>
+                      <linearGradient id="softAreaGrad" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.18"></stop>
+                        <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.0"></stop>
+                      </linearGradient>
+                    </defs>
+                    <!-- Dynamic Grid Lines and Paths rendered by app.js -->
+                  </svg>
+                  
+                  <!-- Dynamic X-Axis Date Labels -->
+                  <div id="dashboard-cashflow-labels" class="flex items-center justify-between pt-2 text-outline font-label-sm text-label-sm">
+                    <!-- Injected dynamically based on selected day-cycle -->
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: CREDIT FACILITIES, FREQUENT PAYEES (5 cols) -->
+            <div class="lg:col-span-5 flex flex-col space-y-7">
+              
+              <!-- Active Loans Header -->
+              <div class="flex items-center justify-between">
+                <div class="flex flex-col">
+                  <h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Credit &amp; Loans</h3>
+                  <span class="font-body-sm text-body-sm text-outline">1 active loan facility in good standing</span>
+                </div>
+                <button class="font-label-sm text-label-sm text-primary-container hover:underline font-medium" type="button" onclick="navigateTo('loans-overview')">Explore Rates</button>
+              </div>
+
+              <!-- Loan Facility: Home Loan #HL-4091 -->
+              <div id="dashboard-loan-card" class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/25 shadow-sm flex flex-col space-y-4">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface">
+                      <span class="material-symbols-outlined text-[20px]">home</span>
+                    </div>
+                    <div>
+                      <h4 id="dashboard-loan-title" class="font-label-md text-label-md font-semibold text-on-surface">Home Loan #HL-4091</h4>
+                      <p id="dashboard-loan-sub" class="font-label-sm text-label-sm text-outline">Fixed 8.25% p.a. · 20-Yr Floating Tenure</p>
+                    </div>
+                  </div>
+                  <span id="dashboard-loan-status" class="font-label-sm text-label-sm text-secondary font-semibold">On Track</span>
+                </div>
+
+                <div>
+                  <div class="flex justify-between items-baseline mb-1.5">
+                    <span class="font-label-sm text-label-sm text-outline">Outstanding Principal</span>
+                    <span id="dashboard-loan-outstanding" class="font-headline-sm text-headline-sm font-bold text-on-surface">₹28,50,000</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+                    <div id="dashboard-loan-progressbar" class="h-full bg-primary-container rounded-full" style="width: 52.5%;"></div>
+                  </div>
+                  <div class="flex justify-between items-center pt-1.5 text-outline font-label-sm text-label-sm">
+                    <span id="dashboard-loan-progress-text">Repaid ₹31,50,000 (52.5%)</span>
+                    <span id="dashboard-loan-principal-text">Principal ₹60,00,000</span>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-1 border-t border-outline-variant/20">
+                  <div>
+                    <span class="font-label-sm text-label-sm text-outline">Monthly EMI</span>
+                    <p id="dashboard-loan-emi" class="font-label-md text-label-md font-semibold text-on-surface">₹28,500/mo</p>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-outline">Next Due Date</span>
+                    <p id="dashboard-loan-duedate" class="font-label-md text-label-md font-semibold text-on-surface">Nov 15, 2024</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-1">
+                  <a class="font-label-sm text-label-sm text-outline hover:text-primary-container hover:underline font-medium inline-flex items-center gap-1" href="#loans-overview" onclick="navigateTo('loans-overview')">
+                    <span class="material-symbols-outlined text-[15px]">calendar_month</span>
+                    <span>View Amortization</span>
+                  </a>
+                  <button class="px-3.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm font-semibold text-primary-container transition-colors" type="button" onclick="navigateTo('pay-emi')">
+                    Pay Extra Principal
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Trusted Payee Shortcuts -->
+              <div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/25 shadow-sm flex flex-col space-y-3.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-label-md text-label-md font-semibold text-on-surface">Frequent Payees</h4>
+                  <a class="font-label-sm text-label-sm text-outline hover:text-on-surface font-medium" href="#transfer-and-pay" onclick="navigateTo('transfer-and-pay')">All Contacts (18)</a>
+                </div>
+                
+                <div id="dashboard-frequent-payees-container" class="grid grid-cols-4 gap-2 pt-1 text-center">
+                  <!-- Elena R. -->
+                  <button class="group flex flex-col items-center gap-1.5 focus:outline-none" type="button" onclick="navigateTo('transfer-and-pay')">
+                    <div class="relative w-12 h-12 rounded-full ring-2 ring-transparent group-hover:ring-primary-container transition-all overflow-hidden bg-surface-container">
+                      <img class="w-full h-full object-cover" alt="Elena" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKwbqviU7xOZnZrxHAEqhVJ2hBMobPe4maVSaAsiwRbSqeYafQSgS1Kzn_DY9hcaL9U6U5t1wjecnsg9cGq3wGGyHL_-hfF3wD_-GxcTp_AMP_NT3dePnlJHTmYe7-ZPC8sko-k40YGJ7HS1fwgPv5e_6VfLPksDODRPmXzYv52a7B5PJUhL_08ntAw-1PATwf_iBHhNlcksiXZvNmLF2gyo6BDMo2eBXR5AaB8KrwsMlp5r0DRftP"/>
+                    </div>
+                    <span class="font-label-sm text-label-sm font-medium text-on-surface truncate w-full">Elena R.</span>
+                  </button>
+                  
+                  <!-- Rahul Verma -->
+                  <button class="group flex flex-col items-center gap-1.5 focus:outline-none" type="button" onclick="navigateTo('transfer-and-pay')">
+                    <div class="relative w-12 h-12 rounded-full ring-2 ring-transparent group-hover:ring-primary-container transition-all overflow-hidden bg-surface-container">
+                      <img class="w-full h-full object-cover" alt="Rahul" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbp3dF0ADfpMYIbLU8AQ06M74wiNpLSveNgSe8qjRwF9Y2FZffJORHE93HxVo_YsgbWGJPIU7i4i6-ORlqTkOi1dhYTGn9E964X19iFLWDC3D04T4ZDHlYd_SC94Fx3yqrZufEBQTD_k6qL8AufEY4GpO-FcByChYwVCz96SVxZTULJk0aWFVIN07CSeOf0QgHppz9D2Zei8SAdvLPspaBM5nTtoUaNSZf6JnYkdXwBcqtyi93cUmz"/>
+                    </div>
+                    <span class="font-label-sm text-label-sm font-medium text-on-surface truncate w-full">Rahul Verma</span>
+                  </button>
+
+                  <!-- Arjun Sharma -->
+                  <button class="group flex flex-col items-center gap-1.5 focus:outline-none" type="button" onclick="navigateTo('transfer-and-pay')">
+                    <div class="relative w-12 h-12 rounded-full ring-2 ring-transparent group-hover:ring-primary-container transition-all overflow-hidden bg-surface-container">
+                      <img class="w-full h-full object-cover" alt="Arjun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZtFwwtN4UkRJMPbW-4TyyjnKUarG1b4RBhaHQPQ8r4F6JfNPCoJnVF-arfBm1Aoarw88gQTQ_3ZP1CE_qgbe-Iw94qO4YN6Dow6YYRtK0s7-nsgX856stf617RYifEltPNuGeOQxeryDBnQswnzazRswoBsBXF3A01Eu3k0eNs9L7maxij5pxTSpUdpiUdERVKXbu1U1HmW3L3z6sncZOZVKa4AAtHygpSllcDkVU6ArumVmEw2n-"/>
+                    </div>
+                    <span class="font-label-sm text-label-sm font-medium text-on-surface truncate w-full">Arjun Sharma</span>
+                  </button>
+
+                  <!-- BESCOM Utilities -->
+                  <button class="group flex flex-col items-center gap-1.5 focus:outline-none" type="button" onclick="navigateTo('transfer-and-pay')">
+                    <div class="w-12 h-12 rounded-full bg-surface-container-high group-hover:bg-primary-fixed flex items-center justify-center text-primary-container transition-colors">
+                      <span class="material-symbols-outlined text-[20px]">bolt</span>
+                    </div>
+                    <span class="font-label-sm text-label-sm font-medium text-on-surface truncate w-full">BESCOM</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- BOTTOM SECTION: AUTHENTIC REAL-WORLD INDIAN BANKING LEDGER -->
+        <section class="w-full pt-10 max-w-[1400px]">
+          <div class="flex flex-col space-y-4">
+            
+            <!-- Ledger Header & Filter Controls -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h2 class="font-headline-md text-headline-md font-bold text-on-surface">Recent Activity</h2>
+                <p class="font-body-sm text-body-sm text-outline">Real-time ledger updates across all connected Indian bank accounts</p>
+              </div>
+
+              <!-- Filter Pill Group -->
+              <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                <button class="txn-filter-pill px-3.5 py-1.5 rounded-full bg-on-surface text-surface font-label-sm text-label-sm font-semibold shrink-0 shadow-sm" data-filter="all" type="button">All</button>
+                <button class="txn-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium shrink-0 transition-colors border border-outline-variant/30" data-filter="credits" type="button">Credits</button>
+                <button class="txn-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium shrink-0 transition-colors border border-outline-variant/30" data-filter="transfer" type="button">UPI &amp; Transfers</button>
+                <button class="txn-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium shrink-0 transition-colors border border-outline-variant/30" data-filter="shopping" type="button">Card Purchases</button>
+                <button class="txn-filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium shrink-0 transition-colors border border-outline-variant/30" data-filter="emi_bills" type="button">EMI &amp; Bills</button>
+              </div>
+            </div>
+
+            <!-- Flat Ledger Table -->
+            <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/25 overflow-hidden">
+              <div class="hidden sm:grid sm:grid-cols-12 px-6 py-3.5 bg-surface-container-low text-outline font-label-sm text-label-sm uppercase tracking-wider font-semibold border-b border-outline-variant/20">
+                <span class="col-span-4">Description / Entity</span>
+                <span class="col-span-2">Category</span>
+                <span class="col-span-2">Account</span>
+                <span class="col-span-1">Date</span>
+                <span class="col-span-1 text-center">Status</span>
+                <span class="col-span-2 text-right">Amount</span>
+              </div>
+
+              <!-- Transaction Rows -->
+              <div id="dashboard-txns-container" class="divide-y divide-outline-variant/15">
+                
+                <!-- Row 1: Amazon India -->
+                <div class="txn-row flex flex-col sm:grid sm:grid-cols-12 px-6 py-4 items-start sm:items-center gap-2 sm:gap-0 hover:bg-surface-container-low/50 transition-colors" data-category="shopping">
+                  <div class="sm:col-span-4 flex items-center gap-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+                      <span class="material-symbols-outlined text-[19px]">shopping_bag</span>
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span class="font-body-md text-body-md font-semibold text-on-surface truncate">Amazon India</span>
+                      <span class="font-label-sm text-label-sm text-outline sm:hidden">Shopping &amp; Electronics</span>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm hidden sm:block">Shopping &amp; Electronics</div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm">Savings •••• 4821</div>
+                  <div class="sm:col-span-1 text-on-surface-variant font-label-sm text-label-sm">Nov 10</div>
+                  <div class="sm:col-span-1 flex sm:justify-center items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    <span class="font-label-sm text-label-sm text-secondary font-medium">Completed</span>
+                  </div>
+                  <div class="sm:col-span-2 sm:text-right font-headline-sm text-headline-sm font-semibold text-on-surface">-₹2,499.00</div>
+                </div>
+
+                <!-- Row 2: Tata Consultancy Services Salary -->
+                <div class="txn-row flex flex-col sm:grid sm:grid-cols-12 px-6 py-4 items-start sm:items-center gap-2 sm:gap-0 hover:bg-surface-container-low/50 transition-colors" data-category="credits">
+                  <div class="sm:col-span-4 flex items-center gap-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                      <span class="material-symbols-outlined text-[19px]">domain</span>
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span class="font-body-md text-body-md font-semibold text-on-surface truncate">Tata Consultancy Services</span>
+                      <span class="font-label-sm text-label-sm text-outline sm:hidden">Monthly Salary Credit</span>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm hidden sm:block">Monthly Salary Credit</div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm">Savings •••• 4821</div>
+                  <div class="sm:col-span-1 text-on-surface-variant font-label-sm text-label-sm">Nov 08</div>
+                  <div class="sm:col-span-1 flex sm:justify-center items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    <span class="font-label-sm text-label-sm text-secondary font-medium">Completed</span>
+                  </div>
+                  <div class="sm:col-span-2 sm:text-right font-headline-sm text-headline-sm font-semibold text-secondary">+₹1,45,000.00</div>
+                </div>
+
+                <!-- Row 3: Finova Home Loan EMI -->
+                <div class="txn-row flex flex-col sm:grid sm:grid-cols-12 px-6 py-4 items-start sm:items-center gap-2 sm:gap-0 hover:bg-surface-container-low/50 transition-colors" data-category="emi_bills">
+                  <div class="sm:col-span-4 flex items-center gap-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+                      <span class="material-symbols-outlined text-[19px]">home</span>
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span class="font-body-md text-body-md font-semibold text-on-surface truncate">Finova Home Loan EMI</span>
+                      <span class="font-label-sm text-label-sm text-outline sm:hidden">Auto-debit #HL-4091</span>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm hidden sm:block">Auto-debit #HL-4091</div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm">Savings •••• 4821</div>
+                  <div class="sm:col-span-1 text-on-surface-variant font-label-sm text-label-sm">Nov 01</div>
+                  <div class="sm:col-span-1 flex sm:justify-center items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    <span class="font-label-sm text-label-sm text-secondary font-medium">Completed</span>
+                  </div>
+                  <div class="sm:col-span-2 sm:text-right font-headline-sm text-headline-sm font-semibold text-on-surface">-₹28,500.00</div>
+                </div>
+
+                <!-- Row 4: Swiggy Dineout -->
+                <div class="txn-row flex flex-col sm:grid sm:grid-cols-12 px-6 py-4 items-start sm:items-center gap-2 sm:gap-0 hover:bg-surface-container-low/50 transition-colors" data-category="transfer">
+                  <div class="sm:col-span-4 flex items-center gap-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+                      <span class="material-symbols-outlined text-[19px]">restaurant</span>
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span class="font-body-md text-body-md font-semibold text-on-surface truncate">Swiggy Dineout</span>
+                      <span class="font-label-sm text-label-sm text-outline sm:hidden">Food &amp; Dining</span>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm hidden sm:block">Food &amp; Dining</div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm">Savings •••• 4821</div>
+                  <div class="sm:col-span-1 text-on-surface-variant font-label-sm text-label-sm">Oct 31</div>
+                  <div class="sm:col-span-1 flex sm:justify-center items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    <span class="font-label-sm text-label-sm text-secondary font-medium">Completed</span>
+                  </div>
+                  <div class="sm:col-span-2 sm:text-right font-headline-sm text-headline-sm font-semibold text-on-surface">-₹1,840.00</div>
+                </div>
+
+                <!-- Row 5: BESCOM Bangalore Electricity -->
+                <div class="txn-row flex flex-col sm:grid sm:grid-cols-12 px-6 py-4 items-start sm:items-center gap-2 sm:gap-0 hover:bg-surface-container-low/50 transition-colors" data-category="emi_bills">
+                  <div class="sm:col-span-4 flex items-center gap-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+                      <span class="material-symbols-outlined text-[19px]">lightbulb</span>
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span class="font-body-md text-body-md font-semibold text-on-surface truncate">BESCOM Bangalore Electricity</span>
+                      <span class="font-label-sm text-label-sm text-outline sm:hidden">Utilities &amp; Bills</span>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm hidden sm:block">Utilities &amp; Bills</div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm">Savings •••• 4821</div>
+                  <div class="sm:col-span-1 text-on-surface-variant font-label-sm text-label-sm">Oct 28</div>
+                  <div class="sm:col-span-1 flex sm:justify-center items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    <span class="font-label-sm text-label-sm text-secondary font-medium">Completed</span>
+                  </div>
+                  <div class="sm:col-span-2 sm:text-right font-headline-sm text-headline-sm font-semibold text-on-surface">-₹1,250.00</div>
+                </div>
+
+                <!-- Row 6: Fixed Deposit Quarterly Interest -->
+                <div class="txn-row flex flex-col sm:grid sm:grid-cols-12 px-6 py-4 items-start sm:items-center gap-2 sm:gap-0 hover:bg-surface-container-low/50 transition-colors" data-category="credits">
+                  <div class="sm:col-span-4 flex items-center gap-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                      <span class="material-symbols-outlined text-[19px]">account_balance</span>
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span class="font-body-md text-body-md font-semibold text-on-surface truncate">Fixed Deposit Quarterly Interest</span>
+                      <span class="font-label-sm text-label-sm text-outline sm:hidden">Interest Payout</span>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm hidden sm:block">Interest Payout</div>
+                  <div class="sm:col-span-2 text-on-surface-variant font-label-sm text-label-sm">Savings •••• 1092</div>
+                  <div class="sm:col-span-1 text-on-surface-variant font-label-sm text-label-sm">Oct 25</div>
+                  <div class="sm:col-span-1 flex sm:justify-center items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    <span class="font-label-sm text-label-sm text-secondary font-medium">Completed</span>
+                  </div>
+                  <div class="sm:col-span-2 sm:text-right font-headline-sm text-headline-sm font-semibold text-secondary">+₹3,420.50</div>
+                </div>
+
+              </div>
+
+              <!-- Ledger Footer & Export -->
+              <div class="px-6 py-4 bg-surface-container-low/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-outline">
+                <span class="font-label-sm text-label-sm">Showing 6 of 142 transactions</span>
+                <div class="flex items-center gap-4">
+                  <button id="dashboard-btn-download-statement" class="font-label-sm text-label-sm text-primary-container hover:underline font-semibold inline-flex items-center gap-1" type="button">
+                    <span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+                    <span>Download monthly statement (PDF)</span>
+                  </button>
+                  <div class="flex items-center gap-1">
+                    <button class="px-2.5 py-1 rounded-lg bg-surface-container-lowest text-outline hover:text-on-surface font-label-sm text-label-sm border border-outline-variant/30" type="button">Previous</button>
+                    <button class="w-7 h-7 rounded-lg bg-primary-container text-white font-label-sm text-label-sm font-semibold flex items-center justify-center" type="button">1</button>
+                    <button class="w-7 h-7 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm hover:bg-surface-container flex items-center justify-center border border-outline-variant/30" type="button">2</button>
+                    <button class="w-7 h-7 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm hover:bg-surface-container flex items-center justify-center border border-outline-variant/30" type="button">3</button>
+                    <button class="px-2.5 py-1 rounded-lg bg-surface-container-lowest text-outline hover:text-on-surface font-label-sm text-label-sm border border-outline-variant/30" type="button">Next</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 2: ACCOUNTS DETAIL VIEW                             -->
+      <!-- ======================================================== -->
+      <div id="view-accounts" class="app-view hidden flex flex-col w-full pb-16 max-w-[1400px]">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30 flex justify-between items-end">
+          <div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Accounts &amp; Deposits</h1>
+            <p class="font-body-sm text-body-sm text-outline">Active Indian retail accounts, deposits, and linked debit facilities</p>
+          </div>
+          <button class="btn-quick-transfer px-4 py-2 rounded-xl bg-primary-container text-white font-label-md font-semibold shadow-sm hover:bg-primary transition-colors" type="button">
+            Transfer Between Accounts
+          </button>
+        </div>
+
+        <div id="accounts-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+          
+          <!-- Card 1: Primary Savings -->
+          <div class="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-5">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm font-semibold">Active · Primary</span>
+                <span class="font-label-sm text-outline font-medium">IFSC: FINO0001234</span>
+              </div>
+              <h3 class="font-headline-sm text-on-surface font-semibold pt-2">Primary Savings</h3>
+              <p class="font-body-sm text-outline">•••• 4821 · RuPay Platinum</p>
+            </div>
+            <div>
+              <p class="font-label-sm text-outline">Available Balance</p>
+              <p class="font-financial-numeric text-on-surface font-bold tracking-tight">₹42,650.30</p>
+              <p class="font-body-sm text-outline pt-1">Book / Ledger Balance: ₹43,100.00</p>
+            </div>
+            <div class="pt-3 border-t border-outline-variant/20 flex gap-2">
+              <button class="flex-1 py-2 rounded-lg bg-surface-container font-label-sm font-medium hover:bg-surface-container-high transition-colors text-on-surface" type="button" onclick="navigateTo('transactions')">Ledger</button>
+              <button class="btn-quick-transfer flex-1 py-2 rounded-lg bg-primary-container text-white font-label-sm font-medium hover:bg-primary transition-colors" type="button">Send Money</button>
+            </div>
+          </div>
+
+          <!-- Card 2: Secondary Savings -->
+          <div class="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-5">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="px-2.5 py-0.5 rounded-full bg-primary-container/10 text-primary-container font-label-sm font-semibold">High-Yield Savings</span>
+                <span class="font-label-sm text-outline font-medium">IFSC: FINO0001234</span>
+              </div>
+              <h3 class="font-headline-sm text-on-surface font-semibold pt-2">Secondary Savings</h3>
+              <p class="font-body-sm text-outline">•••• 1092 · 4.50% p.a.</p>
+            </div>
+            <div>
+              <p class="font-label-sm text-outline">Available Balance</p>
+              <p class="font-financial-numeric text-on-surface font-bold tracking-tight">₹75,800.50</p>
+              <p class="font-body-sm text-secondary pt-1">+₹306.20 interest credited in Oct</p>
+            </div>
+            <div class="pt-3 border-t border-outline-variant/20 flex gap-2">
+              <button class="flex-1 py-2 rounded-lg bg-surface-container font-label-sm font-medium hover:bg-surface-container-high transition-colors text-on-surface" type="button" onclick="navigateTo('transactions')">Ledger</button>
+              <button class="btn-quick-transfer flex-1 py-2 rounded-lg bg-primary-container text-white font-label-sm font-medium hover:bg-primary transition-colors" type="button">Send Money</button>
+            </div>
+          </div>
+
+          <!-- Card 3: Business Current Account -->
+          <div class="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-5">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm font-semibold">Commercial Current</span>
+                <span class="font-label-sm text-outline font-medium">IFSC: FINO0005678</span>
+              </div>
+              <h3 class="font-headline-sm text-on-surface font-semibold pt-2">Current Facility</h3>
+              <p class="font-body-sm text-outline">•••• 9934 · Zero Penalty</p>
+            </div>
+            <div>
+              <p class="font-label-sm text-outline">Available Balance</p>
+              <p class="font-financial-numeric text-on-surface font-bold tracking-tight">₹10,000.00</p>
+              <p class="font-body-sm text-outline pt-1">OD Limit: ₹1,00,000.00</p>
+            </div>
+            <div class="pt-3 border-t border-outline-variant/20 flex gap-2">
+              <button class="flex-1 py-2 rounded-lg bg-surface-container font-label-sm font-medium hover:bg-surface-container-high transition-colors text-on-surface" type="button" onclick="navigateTo('transactions')">Ledger</button>
+              <button class="btn-quick-transfer flex-1 py-2 rounded-lg bg-primary-container text-white font-label-sm font-medium hover:bg-primary transition-colors" type="button">Send Money</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 3: TRANSACTIONS VIEW                                -->
+      <!-- ======================================================== -->
+      <div id="view-transactions" class="app-view hidden flex flex-col w-full pb-16 max-w-[1400px]">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30 flex justify-between items-end">
+          <div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Transaction Ledger</h1>
+            <p class="font-body-sm text-body-sm text-outline">Real-time audited banking transaction history</p>
+          </div>
+          <button id="transactions-btn-export" class="px-4 py-2 rounded-xl bg-surface-container-lowest border border-outline-variant/30 font-label-md font-medium text-on-surface hover:bg-surface-container transition-colors inline-flex items-center gap-1.5" type="button">
+            <span class="material-symbols-outlined text-[18px]">file_download</span>
+            <span>Export CSV</span>
+          </button>
+        </div>
+
+        <div class="pt-6">
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/25 overflow-hidden">
+            <div class="p-4 border-b border-outline-variant/20 flex flex-wrap items-center justify-between gap-3">
+              <input id="transactions-search-input" class="px-3.5 py-1.5 rounded-lg border border-outline-variant/40 text-body-sm text-on-surface bg-surface-container-lowest focus:outline-none focus:border-primary-container w-72" placeholder="Search by name, ref, or remark..." type="text"/>
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-outline">Category:</span>
+                <select id="transactions-category-select" class="px-3 py-1.5 rounded-lg border border-outline-variant/40 text-label-sm bg-surface-container-lowest text-on-surface">
+                  <option value="All">All Categories</option>
+                  <option value="SALARY">Salary &amp; Inflows</option>
+                  <option value="SHOPPING">Card Purchases</option>
+                  <option value="EMI_PAYMENT">EMI &amp; Bills</option>
+                  <option value="TRANSFER">Transfers</option>
+                  <option value="INTEREST">Interest Payout</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Ledger Table -->
+            <div class="divide-y divide-outline-variant/15">
+              <div class="grid grid-cols-12 px-6 py-3.5 bg-surface-container-low text-outline font-label-sm uppercase tracking-wider font-semibold border-b border-outline-variant/20">
+                <span class="col-span-4">Beneficiary / Merchant</span>
+                <span class="col-span-2">Category</span>
+                <span class="col-span-2">Account</span>
+                <span class="col-span-1">Date</span>
+                <span class="col-span-1 text-center">Status</span>
+                <span class="col-span-2 text-right">Amount (₹)</span>
+              </div>
+              <div id="transactions-table-rows" class="divide-y divide-outline-variant/15">
+              <div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-surface-container-low/50">
+                <span class="col-span-4 font-semibold text-on-surface">Amazon India</span>
+                <span class="col-span-2 text-outline text-label-sm">Shopping &amp; Electronics</span>
+                <span class="col-span-2 text-on-surface-variant text-label-sm">Savings •••• 4821</span>
+                <span class="col-span-1 text-outline text-label-sm">Nov 10</span>
+                <span class="col-span-1 text-center text-secondary text-label-sm font-semibold">Completed</span>
+                <span class="col-span-2 text-right font-headline-sm font-bold text-on-surface">-₹2,499.00</span>
+              </div>
+              <div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-surface-container-low/50">
+                <span class="col-span-4 font-semibold text-on-surface">Tata Consultancy Services</span>
+                <span class="col-span-2 text-outline text-label-sm">Monthly Salary Credit</span>
+                <span class="col-span-2 text-on-surface-variant text-label-sm">Savings •••• 4821</span>
+                <span class="col-span-1 text-outline text-label-sm">Nov 08</span>
+                <span class="col-span-1 text-center text-secondary text-label-sm font-semibold">Completed</span>
+                <span class="col-span-2 text-right font-headline-sm font-bold text-secondary">+₹1,45,000.00</span>
+              </div>
+              <div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-surface-container-low/50">
+                <span class="col-span-4 font-semibold text-on-surface">Finova Home Loan EMI</span>
+                <span class="col-span-2 text-outline text-label-sm">Auto-debit #HL-4091</span>
+                <span class="col-span-2 text-on-surface-variant text-label-sm">Savings •••• 4821</span>
+                <span class="col-span-1 text-outline text-label-sm">Nov 01</span>
+                <span class="col-span-1 text-center text-secondary text-label-sm font-semibold">Completed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 4: TRANSFER & PAY (7-STEP WORKFLOW UI)              -->
+      <!-- ======================================================== -->
+      <div id="view-transfer-and-pay" class="app-view hidden flex flex-col w-full pb-16 max-w-[1000px] mx-auto">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30">
+          <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Transfer Money</h1>
+          <p class="font-body-sm text-body-sm text-outline">Internal Finova transfers &amp; External Indian Bank Transfers (NEFT / RTGS / IMPS)</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-7 mt-6 space-y-6">
+          <form id="transfer-form" class="space-y-5">
+            
+            <!-- From Account -->
+            <div>
+              <label class="block font-label-md text-on-surface font-semibold mb-1.5">Debit From Account</label>
+              <select id="transfer-from-account" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container">
+                <option value="1">Primary Savings •••• 4821 (Available: ₹42,650.30)</option>
+                <option value="2">Secondary Savings •••• 1092 (Available: ₹75,800.50)</option>
+                <option value="3">Current Account •••• 9934 (Available: ₹10,000.00)</option>
+              </select>
+            </div>
+
+            <!-- Beneficiary Name -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Beneficiary / Payee Name</label>
+                <input id="transfer-beneficiary" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container" placeholder="e.g. Rahul Verma" value="Rahul Verma" type="text" required/>
+              </div>
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Transfer Mode</label>
+                <select class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container">
+                  <option>IMPS (Instant 24x7 Settlement)</option>
+                  <option>NEFT (National Electronic Fund Transfer)</option>
+                  <option>RTGS (High Value Real-Time Gross Settlement)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Account Numbers -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Beneficiary Account Number</label>
+                <input id="transfer-account" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container" placeholder="12 to 16 digit account number" value="837199208371" type="text" required/>
+              </div>
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Confirm Account Number</label>
+                <input id="transfer-confirm-account" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container" placeholder="Re-enter account number" value="837199208371" type="text" required/>
+              </div>
+            </div>
+
+            <!-- IFSC and Amount -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">IFSC Code (11 Digits)</label>
+                <input id="transfer-ifsc" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container uppercase" placeholder="e.g. HDFC0001200" value="HDFC0001200" maxlength="11" type="text" required/>
+              </div>
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Transfer Amount (₹ INR)</label>
+                <input id="transfer-amount" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container" placeholder="e.g. 5,000.00" value="5000.00" type="number" step="0.01" required/>
+              </div>
+            </div>
+
+            <!-- Remarks -->
+            <div>
+              <label class="block font-label-md text-on-surface font-semibold mb-1.5">Transfer Remarks / Notes</label>
+              <input id="transfer-remarks" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container" placeholder="e.g. Consulting fees / Personal transfer" value="Monthly retainer payment" type="text"/>
+            </div>
+
+            <!-- Submit Action -->
+            <div class="pt-3 flex justify-end">
+              <button id="transfer-btn-review" class="px-6 py-3 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-all duration-150 shadow-sm inline-flex items-center gap-2" type="button">
+                <span>Review &amp; Confirm Transfer</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Transfer Review Modal -->
+        <div id="transfer-review-modal" class="hidden fixed inset-0 bg-on-surface/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div class="glass-card-elevated rounded-2xl max-w-md w-full p-6 space-y-5 bg-surface-container-lowest border border-outline-variant/40 shadow-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]">verified_user</span>
+              </div>
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Confirm Transfer</h3>
+                <p class="font-label-sm text-outline">Verify beneficiary details before authorization</p>
+              </div>
+            </div>
+
+            <div id="transfer-modal-summary" class="bg-surface-container-low p-4 rounded-xl"></div>
+
+            <div class="flex items-center justify-end gap-3 pt-2">
+              <button id="transfer-btn-cancel" class="px-4 py-2.5 rounded-xl border border-outline-variant/40 text-on-surface font-label-md font-medium hover:bg-surface-container transition-colors" type="button">Cancel</button>
+              <button id="transfer-btn-confirm" class="px-5 py-2.5 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-colors inline-flex items-center gap-1.5" type="button">
+                <span>Authorize &amp; Send</span>
+                <span class="material-symbols-outlined text-[18px]">lock</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transfer Result Modal -->
+        <div id="transfer-result-modal" class="hidden fixed inset-0 bg-on-surface/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div class="glass-card-elevated rounded-2xl max-w-md w-full p-6 space-y-4 bg-surface-container-lowest border border-outline-variant/40 shadow-xl text-center">
+            <div id="transfer-result-icon-box" class="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary mx-auto flex items-center justify-center">
+              <span id="transfer-result-icon" class="material-symbols-outlined text-[32px]">check_circle</span>
+            </div>
+            <h3 id="transfer-result-title" class="font-headline-sm font-bold text-on-surface">Transfer Successful</h3>
+            <p id="transfer-result-message" class="font-body-sm text-outline">Your fund transfer has been processed with full ACID transactional integrity.</p>
+            <div id="transfer-result-details" class="p-3.5 bg-surface-container-low rounded-xl text-body-sm text-on-surface font-medium text-left"></div>
+            <button id="transfer-result-btn-close" class="w-full py-2.5 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-colors" type="button">
+              Done &amp; View Ledger
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 5: LOANS OVERVIEW & CATALOG                         -->
+      <!-- ======================================================== -->
+      <div id="view-loans-overview" class="app-view hidden flex flex-col w-full pb-16 max-w-[1400px]">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30 flex justify-between items-end">
+          <div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Credit &amp; Loans Overview</h1>
+            <p class="font-body-sm text-body-sm text-outline">Manage active facilities, examine interest rates, and track repayment schedules</p>
+          </div>
+          <button class="btn-quick-apply-loan px-4 py-2.5 rounded-xl bg-primary-container text-white font-label-md font-semibold shadow-sm hover:bg-primary transition-colors inline-flex items-center gap-2" type="button">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            <span>Apply for New Facility</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-6">
+          
+          <!-- Active Facility Card -->
+          <div class="lg:col-span-2 glass-card p-7 rounded-2xl space-y-5">
+            <div class="flex justify-between items-start">
+              <div>
+                <span id="loans-overview-badge" class="px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm font-semibold">Active Loan Facility</span>
+                <h3 id="loans-overview-title" class="font-headline-sm text-on-surface font-bold pt-1">Home Loan #HL-4091</h3>
+                <p id="loans-overview-sub" class="font-body-sm text-outline">Sanctioned: ₹60,00,000.00 @ 8.25% p.a. (Fixed)</p>
+              </div>
+              <span class="text-right font-label-sm text-outline">Next EMI: <strong id="loans-overview-duedate">Nov 15, 2024</strong></span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 p-4 rounded-xl bg-surface-container-low">
+              <div>
+                <span class="font-label-sm text-outline">Outstanding Balance</span>
+                <p id="loans-overview-outstanding" class="font-headline-sm font-bold text-on-surface">₹28,50,000</p>
+              </div>
+              <div>
+                <span class="font-label-sm text-outline">Total Repaid</span>
+                <p id="loans-overview-repaid" class="font-headline-sm font-bold text-secondary">₹31,50,000</p>
+              </div>
+              <div>
+                <span class="font-label-sm text-outline">Monthly EMI</span>
+                <p id="loans-overview-emi" class="font-headline-sm font-bold text-primary-container">₹28,500/mo</p>
+              </div>
+            </div>
+
+            <!-- Repayment Progress -->
+            <div>
+              <div class="flex justify-between text-label-sm text-outline mb-1.5">
+                <span id="loans-overview-progress-text">Progress: 52.5% Repaid</span>
+                <span id="loans-overview-tenure-text">Tenure: 126 of 240 Installments Paid</span>
+              </div>
+              <div class="w-full h-2.5 rounded-full bg-surface-container overflow-hidden">
+                <div id="loans-overview-progressbar" class="h-full bg-primary-container rounded-full" style="width: 52.5%;"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+              <span class="font-label-sm text-outline">Servicing Account: <strong id="loans-overview-servicing">Savings •••• 4821</strong></span>
+              <button class="btn-quick-pay-emi px-4 py-2 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors" type="button">
+                Pay Outstanding EMI
+              </button>
+            </div>
+          </div>
+
+          <!-- CIBIL Credit Score Simulation Widget -->
+          <div class="glass-card p-7 rounded-2xl flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container text-[20px]">verified_user</span>
+                <h4 class="font-label-md font-semibold text-on-surface">CIBIL Credit Score (Simulation)</h4>
+              </div>
+              <p class="font-body-sm text-outline pt-1">Academic simulation adhering to standard 300–900 credit scoring bands.</p>
+            </div>
+
+            <div class="flex flex-col items-center py-2">
+              <span id="loans-overview-cibil-score" class="font-headline-xl text-[48px] font-bold text-on-surface leading-none">785</span>
+              <span id="loans-overview-cibil-cat" class="font-label-md text-secondary font-semibold mt-1">Excellent Standing</span>
+              <span id="loans-overview-cibil-date" class="font-label-sm text-outline mt-0.5">Updated: Nov 01, 2024</span>
+            </div>
+
+            <p class="font-body-sm text-outline text-center">Zero overdue payments across 48 months. Eligible for instant preferential lending rates.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 6: APPLY FOR CREDIT (MULTI-STEP WIZARD)             -->
+      <!-- ======================================================== -->
+      <div id="view-apply-for-credit" class="app-view hidden flex flex-col w-full pb-16 max-w-[1000px] mx-auto">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30">
+          <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Apply for Loan</h1>
+          <p class="font-body-sm text-body-sm text-outline">Complete our 7-step digital loan application. Instant automated pre-approval check.</p>
+        </div>
+
+        <!-- Wizard Step Indicators -->
+        <div class="flex items-center justify-between py-6 overflow-x-auto">
+          <div class="wizard-step-indicator w-8 h-8 rounded-full flex items-center justify-center font-label-sm" data-step-indicator="1">1</div>
+          <div class="flex-1 h-0.5 bg-outline-variant/20 mx-2"></div>
+          <div class="wizard-step-indicator w-8 h-8 rounded-full flex items-center justify-center font-label-sm" data-step-indicator="2">2</div>
+          <div class="flex-1 h-0.5 bg-outline-variant/20 mx-2"></div>
+          <div class="wizard-step-indicator w-8 h-8 rounded-full flex items-center justify-center font-label-sm" data-step-indicator="3">3</div>
+          <div class="flex-1 h-0.5 bg-outline-variant/20 mx-2"></div>
+          <div class="wizard-step-indicator w-8 h-8 rounded-full flex items-center justify-center font-label-sm" data-step-indicator="4">4</div>
+          <div class="flex-1 h-0.5 bg-outline-variant/20 mx-2"></div>
+          <div class="wizard-step-indicator w-8 h-8 rounded-full flex items-center justify-center font-label-sm" data-step-indicator="5">5</div>
+          <div class="flex-1 h-0.5 bg-outline-variant/20 mx-2"></div>
+          <div class="wizard-step-indicator w-8 h-8 rounded-full flex items-center justify-center font-label-sm" data-step-indicator="6">6</div>
+          <div class="flex-1 h-0.5 bg-outline-variant/20 mx-2"></div>
+          <div class="wizard-step-indicator w-8 h-8 rounded-full flex items-center justify-center font-label-sm" data-step-indicator="7">7</div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-7 space-y-6">
+          
+          <!-- Step 1: Select Facility -->
+          <div class="wizard-step-card space-y-4" data-step="1">
+            <h3 class="font-headline-sm font-semibold text-on-surface">Step 1: Select Loan Facility</h3>
+            <p class="font-body-sm text-outline">Select the financing facility matching your personal or commercial requirement.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              <label class="p-4 rounded-xl border border-outline-variant/40 hover:border-primary-container cursor-pointer flex flex-col gap-2">
+                <input type="radio" name="wizard-loan-type" value="Home Loan" checked class="text-primary-container focus:ring-0"/>
+                <span class="font-label-md font-semibold text-on-surface">Home Loan</span>
+                <span class="font-label-sm text-secondary font-medium">8.25% p.a. · Up to 30 Yrs</span>
+              </label>
+              <label class="p-4 rounded-xl border border-outline-variant/40 hover:border-primary-container cursor-pointer flex flex-col gap-2">
+                <input type="radio" name="wizard-loan-type" value="Personal Loan" class="text-primary-container focus:ring-0"/>
+                <span class="font-label-md font-semibold text-on-surface">Personal Loan</span>
+                <span class="font-label-sm text-secondary font-medium">11.50% p.a. · Collateral-free</span>
+              </label>
+              <label class="p-4 rounded-xl border border-outline-variant/40 hover:border-primary-container cursor-pointer flex flex-col gap-2">
+                <input type="radio" name="wizard-loan-type" value="Education Loan" class="text-primary-container focus:ring-0"/>
+                <span class="font-label-md font-semibold text-on-surface">Education Loan</span>
+                <span class="font-label-sm text-secondary font-medium">9.00% p.a. · Global Study</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2: Sanction Amount -->
+          <div class="wizard-step-card hidden space-y-4" data-step="2">
+            <h3 class="font-headline-sm font-semibold text-on-surface">Step 2: Enter Loan Amount</h3>
+            <p class="font-body-sm text-outline">State the principal amount required in INR (₹).</p>
+            <div>
+              <label class="block font-label-md text-on-surface font-semibold mb-1.5">Requested Amount (₹)</label>
+              <input id="wizard-amount" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface" value="2500000" type="number"/>
+            </div>
+          </div>
+
+          <!-- Step 3: Tenure -->
+          <div class="wizard-step-card hidden space-y-4" data-step="3">
+            <h3 class="font-headline-sm font-semibold text-on-surface">Step 3: Select Repayment Tenure</h3>
+            <p class="font-body-sm text-outline">Select the duration in months over which you plan to repay.</p>
+            <div>
+              <label class="block font-label-md text-on-surface font-semibold mb-1.5">Tenure (Months)</label>
+              <select id="wizard-tenure" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface">
+                <option value="60">60 Months (5 Years)</option>
+                <option value="120" selected>120 Months (10 Years)</option>
+                <option value="180">180 Months (15 Years)</option>
+                <option value="240">240 Months (20 Years)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 4: Employment & Income -->
+          <div class="wizard-step-card hidden space-y-4" data-step="4">
+            <h3 class="font-headline-sm font-semibold text-on-surface">Step 4: Employment &amp; Income Details</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Employment Type</label>
+                <input id="wizard-employment" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface" value="Salaried (TCS)" type="text"/>
+              </div>
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Monthly In-Hand Income (₹)</label>
+                <input id="wizard-income" class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface" value="145000" type="number"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Personal Details -->
+          <div class="wizard-step-card hidden space-y-4" data-step="5">
+            <h3 class="font-headline-sm font-semibold text-on-surface">Step 5: Personal Verification</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Full Name</label>
+                <input class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface" value="Sophia Mehta" type="text" readonly/>
+              </div>
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Phone Number</label>
+                <input class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface" value="+91 98450 12345" type="text" readonly/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6: KYC Document Info -->
+          <div class="wizard-step-card hidden space-y-4" data-step="6">
+            <h3 class="font-headline-sm font-semibold text-on-surface">Step 6: KYC &amp; Documentation</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Permanent Account Number (PAN)</label>
+                <input class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface" value="ABCPM1234F" type="text" readonly/>
+              </div>
+              <div>
+                <label class="block font-label-md text-on-surface font-semibold mb-1.5">Aadhaar Last 4 Digits</label>
+                <input class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface" value="•••• 4821" type="text" readonly/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 7: Review & Confirm -->
+          <div class="wizard-step-card hidden space-y-4" data-step="7">
+            <h3 class="font-headline-sm font-semibold text-on-surface">Step 7: Application Review</h3>
+            <p class="font-body-sm text-outline">Please verify all application details before final underwriting submission.</p>
+            <div id="wizard-review-summary" class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/30"></div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="pt-4 border-t border-outline-variant/20 flex justify-between">
+            <button id="wizard-btn-back" class="px-5 py-2.5 rounded-xl border border-outline-variant/40 text-on-surface font-label-md font-medium hover:bg-surface-container transition-colors" type="button">
+              Back
+            </button>
+            <button id="wizard-btn-next" class="px-6 py-2.5 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-all duration-150 inline-flex items-center gap-1.5" type="button">
+              <span>Continue</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Wizard Application Success Modal -->
+        <div id="wizard-success-modal" class="hidden fixed inset-0 bg-on-surface/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div class="glass-card-elevated rounded-2xl max-w-md w-full p-6 space-y-4 bg-surface-container-lowest border border-outline-variant/40 shadow-xl text-center">
+            <div class="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary mx-auto flex items-center justify-center">
+              <span class="material-symbols-outlined text-[32px]">check_circle</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface">Application Submitted</h3>
+            <p id="wizard-success-message" class="font-body-sm text-outline">Your loan application has been registered into the Finova underwriting queue.</p>
+            <div id="wizard-success-details" class="p-3.5 bg-surface-container-low rounded-xl text-body-sm text-on-surface font-medium text-left"></div>
+            <button id="wizard-success-btn-close" class="w-full py-2.5 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-colors" type="button">
+              View Active Loans
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 7: PAY EMI & FINANCIAL CALCULATOR                   -->
+      <!-- ======================================================== -->
+      <div id="view-pay-emi" class="app-view hidden flex flex-col w-full pb-16 max-w-[1200px] mx-auto">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30">
+          <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">EMI Center &amp; Calculator</h1>
+          <p class="font-body-sm text-body-sm text-outline">Equated Monthly Installment calculation &amp; direct installment settlement</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6 items-start">
+          
+          <!-- Left: Mathematical EMI Calculator Form (7 cols) -->
+          <div class="lg:col-span-7 glass-card p-7 rounded-2xl space-y-6">
+            <div class="border-b border-outline-variant/20 pb-3">
+              <h3 class="font-headline-sm font-semibold text-on-surface">Standard Reducing-Balance Calculator</h3>
+              <p class="font-body-sm text-outline">Adjust sliders to calculate exact monthly EMI, interest obligation, and total repayment.</p>
+            </div>
+
+            <!-- Principal Slider -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="font-label-md font-semibold text-on-surface">Loan Amount (Principal)</label>
+                <div class="flex items-center gap-1 bg-surface-container px-3 py-1 rounded-lg">
+                  <span class="text-outline text-label-sm">₹</span>
+                  <input id="calc-amount" class="w-32 bg-transparent text-right font-bold text-on-surface p-0 border-none focus:ring-0" value="2500000" type="number"/>
+                </div>
+              </div>
+              <input id="calc-amount-slider" class="w-full accent-primary-container cursor-pointer" max="10000000" min="50000" step="50000" type="range" value="2500000"/>
+              <div class="flex justify-between text-outline text-label-sm">
+                <span>₹50,000</span>
+                <span>₹1,00,00,000</span>
+              </div>
+            </div>
+
+            <!-- Rate Slider -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="font-label-md font-semibold text-on-surface">Annual Interest Rate (% p.a.)</label>
+                <div class="flex items-center gap-1 bg-surface-container px-3 py-1 rounded-lg">
+                  <input id="calc-rate" class="w-16 bg-transparent text-right font-bold text-on-surface p-0 border-none focus:ring-0" value="8.25" step="0.05" type="number"/>
+                  <span class="text-outline text-label-sm">%</span>
+                </div>
+              </div>
+              <input id="calc-rate-slider" class="w-full accent-primary-container cursor-pointer" max="24" min="5" step="0.1" type="range" value="8.25"/>
+              <div class="flex justify-between text-outline text-label-sm">
+                <span>5%</span>
+                <span>24%</span>
+              </div>
+            </div>
+
+            <!-- Tenure Slider -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="font-label-md font-semibold text-on-surface">Tenure (Months)</label>
+                <div class="flex items-center gap-1 bg-surface-container px-3 py-1 rounded-lg">
+                  <input id="calc-tenure" class="w-16 bg-transparent text-right font-bold text-on-surface p-0 border-none focus:ring-0" value="240" type="number"/>
+                  <span class="text-outline text-label-sm">Mo</span>
+                </div>
+              </div>
+              <input id="calc-tenure-slider" class="w-full accent-primary-container cursor-pointer" max="360" min="12" step="6" type="range" value="240"/>
+              <div class="flex justify-between text-outline text-label-sm">
+                <span>12 Mo (1 Yr)</span>
+                <span>360 Mo (30 Yrs)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Calculated Results & Pay EMI Trigger (5 cols) -->
+          <div class="lg:col-span-5 space-y-6">
+            
+            <div class="glass-card p-7 rounded-2xl space-y-5">
+              <h4 class="font-label-md uppercase tracking-wider text-outline font-semibold">Repayment Projection</h4>
+              
+              <div class="p-4 rounded-xl bg-primary-container/10 border border-primary-container/20">
+                <span class="font-label-sm text-outline">Monthly EMI Amount</span>
+                <p id="calc-display-emi" class="font-financial-numeric text-primary-container font-bold tracking-tight">₹21,296/mo</p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div class="p-3.5 rounded-xl bg-surface-container-low">
+                  <span class="font-label-sm text-outline">Total Interest</span>
+                  <p id="calc-display-interest" class="font-headline-sm font-semibold text-on-surface pt-1">₹26,11,040</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low">
+                  <span class="font-label-sm text-outline">Total Payable</span>
+                  <p id="calc-display-total" class="font-headline-sm font-semibold text-on-surface pt-1">₹51,11,040</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Direct EMI Settlement Card -->
+            <div class="glass-card p-6 rounded-2xl space-y-4">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 id="pay-emi-title" class="font-headline-sm font-semibold text-on-surface">Upcoming EMI Payment</h4>
+                  <p id="pay-emi-sub" class="font-body-sm text-outline">Home Loan #HL-4091 · Due Nov 15</p>
+                </div>
+                <span id="pay-emi-display-amount" class="font-headline-sm font-bold text-amber-900">₹28,500</span>
+              </div>
+              <div>
+                <label class="block font-label-sm text-outline mb-1.5 font-medium">Debit From Account</label>
+                <select id="pay-emi-account-select" class="w-full h-11 px-3 rounded-xl bg-surface-container-lowest border border-outline-variant/40 font-body-sm text-on-surface focus:outline-none focus:border-primary-container">
+                  <option value="1">Primary Savings •••• 4821 (₹42,650.30)</option>
+                </select>
+              </div>
+              <button id="pay-emi-btn-submit" class="w-full py-3 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-all duration-150 shadow-sm inline-flex items-center justify-center gap-2" type="button">
+                <span>Pay Installment Now</span>
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 8: NOTIFICATIONS CENTER                            -->
+      <!-- ======================================================== -->
+      <div id="view-notifications" class="app-view hidden flex flex-col w-full pb-16 max-w-[900px] mx-auto">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30 flex justify-between items-end">
+          <div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Notifications</h1>
+            <p class="font-body-sm text-body-sm text-outline">Account alerts, EMI reminders, and security logs</p>
+          </div>
+          <button id="btn-notifications-mark-all" class="font-label-sm text-primary-container hover:underline font-semibold" type="button">
+            Mark all as read
+          </button>
+        </div>
+
+        <div id="notifications-list-container" class="glass-card rounded-2xl divide-y divide-outline-variant/20 mt-6 overflow-hidden">
+          <div class="p-5 flex items-start gap-4 hover:bg-surface-container-low/60 transition-colors">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-800 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[20px]">schedule</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between items-baseline">
+                <h4 class="font-label-md font-semibold text-on-surface">Payment Due in 5 Days</h4>
+                <span class="font-label-sm text-outline">Today, 9:00 AM</span>
+              </div>
+              <p class="font-body-sm text-on-surface-variant pt-0.5">Home Loan EMI auto-debit of ₹28,500.00 will be debited from Savings •••• 4821 on Sat, Nov 15.</p>
+            </div>
+          </div>
+
+          <div class="p-5 flex items-start gap-4 hover:bg-surface-container-low/60 transition-colors">
+            <div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[20px]">payments</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between items-baseline">
+                <h4 class="font-label-md font-semibold text-on-surface">Monthly Salary Credited</h4>
+                <span class="font-label-sm text-outline">Nov 08</span>
+              </div>
+              <p class="font-body-sm text-on-surface-variant pt-0.5">₹1,45,000.00 credited to Primary Savings •••• 4821 from Tata Consultancy Services.</p>
+            </div>
+          </div>
+
+          <div class="p-5 flex items-start gap-4 hover:bg-surface-container-low/60 transition-colors">
+            <div class="w-10 h-10 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[20px]">shield</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between items-baseline">
+                <h4 class="font-label-md font-semibold text-on-surface">New Login Detected</h4>
+                <span class="font-label-sm text-outline">Nov 01</span>
+              </div>
+              <p class="font-body-sm text-on-surface-variant pt-0.5">Authenticated session from Chrome (Windows 11) in Bengaluru, Karnataka.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 9: SECURITY & PROFILE / KYC                         -->
+      <!-- ======================================================== -->
+      <div id="view-security-and-profile" class="app-view hidden flex flex-col w-full pb-16 max-w-[1000px] mx-auto">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30">
+          <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Security &amp; Profile</h1>
+          <p class="font-body-sm text-body-sm text-outline">Customer Identification File (CIF), Indian KYC status, and security protocols</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-7 mt-6 space-y-6">
+          <div class="flex items-center gap-4 border-b border-outline-variant/20 pb-5">
+            <img class="w-16 h-16 rounded-full object-cover ring-2 ring-primary-container/30" src="https://lh3.googleusercontent.com/aida/AEtjO1Wia4MnDsCr7NbWxLIWoj4s1UDwkybMRdJG_NQuA1fYhK6u0DgFrVupmfr_CrFY1g6UunCmVBxR2t4jZB_nZGPG4-wOjDCpI39cMxPwJT3yR6LpNu2MLTY4iCagDJWzvjIqGQlYl3SpS4klpYnmHe3v6FRoeFzyH4c6dHZW7tv9eskIOb_nGWIn3J6EaR_UeCZVK3zfux3tTHIZHtcw8LTe5lWVzrwpDymKocJvrqWvReX0rJwTnQTs7g" alt="Sophia"/>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 id="profile-name" class="font-headline-sm font-bold text-on-surface">Sophia Mehta</h3>
+                <span id="profile-kyc-badge" class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm font-semibold">KYC Verified</span>
+              </div>
+              <p id="profile-cif" class="font-body-sm text-outline">Customer ID: CUST-482109 · Finova Premier Client</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-body-sm">
+            <div class="p-3.5 rounded-xl bg-surface-container-low">
+              <span class="text-outline">Permanent Account Number (PAN):</span>
+              <p id="profile-pan" class="font-semibold text-on-surface pt-0.5">ABCPM1234F</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container-low">
+              <span class="text-outline">Aadhaar (Last 4 Digits):</span>
+              <p id="profile-aadhaar" class="font-semibold text-on-surface pt-0.5">•••• •••• 4821</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container-low">
+              <span class="text-outline">Registered Mobile:</span>
+              <p id="profile-mobile" class="font-semibold text-on-surface pt-0.5">+91 98450 12345</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container-low">
+              <span class="text-outline">Primary Branch:</span>
+              <p id="profile-branch" class="font-semibold text-on-surface pt-0.5">Bengaluru Indiranagar (FINO0001234)</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-surface-container-low">
+            <span class="text-outline">Registered Communication Address:</span>
+            <p id="profile-address" class="font-semibold text-on-surface pt-0.5">Penthouse 14B, Palm Grove Residencies, Koramangala, Bengaluru, Karnataka - 560034</p>
+          </div>
+
+          <div class="pt-2 flex justify-end">
+            <button id="btn-profile-signout" class="px-5 py-2.5 rounded-xl border border-error/30 text-error font-label-md font-semibold hover:bg-error-container/40 transition-colors inline-flex items-center gap-2" type="button">
+              <span class="material-symbols-outlined text-[18px]">logout</span>
+              <span>Sign Out of Current Session</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 10: SUPPORT & BRANCH NETWORK                        -->
+      <!-- ======================================================== -->
+      <div id="view-support" class="app-view hidden flex flex-col w-full pb-16 max-w-[1100px] mx-auto">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30">
+          <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Finova Branch Support</h1>
+          <p class="font-body-sm text-body-sm text-outline">Authorized physical branches and 24x7 client support</p>
+        </div>
+
+        <div id="support-branches-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+          <div class="glass-card p-6 rounded-2xl space-y-3">
+            <h4 class="font-headline-sm font-semibold text-on-surface">Bengaluru Main</h4>
+            <p class="font-label-sm text-primary-container font-semibold">IFSC: FINO0001234</p>
+            <p class="font-body-sm text-outline">100 Feet Road, HAL 2nd Stage, Indiranagar, Bengaluru - 560038</p>
+            <p class="font-body-sm text-on-surface font-medium">Manager: Vikram Sengupta</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl space-y-3">
+            <h4 class="font-headline-sm font-semibold text-on-surface">Mumbai BKC Flagship</h4>
+            <p class="font-label-sm text-primary-container font-semibold">IFSC: FINO0005678</p>
+            <p class="font-body-sm text-outline">G Block, BKC, Bandra East, Mumbai - 400051</p>
+            <p class="font-body-sm text-on-surface font-medium">Manager: Pooja Deshmukh</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl space-y-3">
+            <h4 class="font-headline-sm font-semibold text-on-surface">Delhi Central</h4>
+            <p class="font-label-sm text-primary-container font-semibold">IFSC: FINO0009101</p>
+            <p class="font-body-sm text-outline">Barakhamba Road, Connaught Place, New Delhi - 110001</p>
+            <p class="font-body-sm text-on-surface font-medium">Manager: Rajesh Malhotra</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- ======================================================== -->
+      <!-- VIEW 11: EMPLOYEE OPERATIONS PORTAL                      -->
+      <!-- ======================================================== -->
+      <div id="view-employee-portal" class="app-view hidden flex flex-col w-full pb-16 max-w-[1400px]">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-primary-container text-white font-label-sm font-semibold">Staff Operations Portal</span>
+              <span class="font-label-sm text-outline">Branch: Bengaluru Indiranagar · Officer: Ramesh Iyer</span>
+            </div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight pt-1">Credit Underwriting &amp; Branch Operations</h1>
+          </div>
+          
+          <!-- Tab Navigation for Employee -->
+          <div class="flex items-center gap-1 bg-surface-container-low p-1.5 rounded-2xl border border-outline-variant/20 overflow-x-auto">
+            <button type="button" class="employee-tab-btn active px-4 py-2 rounded-xl font-label-md font-semibold text-primary-container bg-surface-container-lowest shadow-sm transition-all whitespace-nowrap" data-tab="loans">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">rate_review</span>Underwriting
+            </button>
+            <button type="button" class="employee-tab-btn px-4 py-2 rounded-xl font-label-md font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="kyc">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">verified_user</span>KYC Queue
+            </button>
+            <button type="button" class="employee-tab-btn px-4 py-2 rounded-xl font-label-md font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="customers">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">person_search</span>Customer Lookup
+            </button>
+            <button type="button" class="employee-tab-btn px-4 py-2 rounded-xl font-label-md font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="ledger">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">monitoring</span>Ledger Monitor
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 16: Employee Dashboard Dynamic Metrics Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 pt-6">
+          <div class="glass-card p-4 rounded-2xl">
+            <span class="font-label-sm text-outline">Assigned to Me</span>
+            <p id="emp-stat-assigned-kyc" class="font-financial-numeric text-2xl font-bold text-primary-container pt-0.5">--</p>
+            <span class="font-label-sm text-outline text-[11px]">Open KYC cases</span>
+          </div>
+          <div class="glass-card p-4 rounded-2xl">
+            <span class="font-label-sm text-outline">Unassigned Queue</span>
+            <p id="emp-stat-pending-kyc" class="font-financial-numeric text-2xl font-bold text-amber-700 pt-0.5">--</p>
+            <span class="font-label-sm text-outline text-[11px]">Pending assignment</span>
+          </div>
+          <div class="glass-card p-4 rounded-2xl">
+            <span class="font-label-sm text-outline">Needs Review</span>
+            <p id="emp-stat-needs-review-kyc" class="font-financial-numeric text-2xl font-bold text-amber-900 pt-0.5">--</p>
+            <span class="font-label-sm text-outline text-[11px]">Clarification pending</span>
+          </div>
+          <div class="glass-card p-4 rounded-2xl">
+            <span class="font-label-sm text-outline">Completed KYC</span>
+            <p id="emp-stat-completed-kyc" class="font-financial-numeric text-2xl font-bold text-secondary pt-0.5">--</p>
+            <span class="font-label-sm text-outline text-[11px]">Verified accounts</span>
+          </div>
+          <div class="glass-card p-4 rounded-2xl col-span-2 lg:col-span-1">
+            <span class="font-label-sm text-outline">Underwriting Queue</span>
+            <p id="emp-stat-pending-loans" class="font-financial-numeric text-2xl font-bold text-on-surface pt-0.5">--</p>
+            <span class="font-label-sm text-outline text-[11px]">Pending loan apps</span>
+          </div>
+        </div>
+
+        <!-- 1. UNDERWRITING TAB -->
+        <div id="employee-panel-loans" class="employee-tab-panel pt-6 space-y-6">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Loan Application Underwriting Queue</h3>
+                <p class="font-body-sm text-outline">Review applicant credit score, debt-to-income ratio, and sanction credit facilities atomically.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <select id="employee-loan-status-filter" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All Statuses</option>
+                  <option value="UNDER_REVIEW" selected>Under Review</option>
+                  <option value="APPROVED">Approved &amp; Disbursed</option>
+                  <option value="REJECTED">Rejected</option>
+                </select>
+                <button type="button" id="btn-refresh-employee-loans" class="p-2 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-outline hover:text-on-surface">
+                  <span class="material-symbols-outlined text-[20px]">refresh</span>
+                </button>
+              </div>
+            </div>
+            
+            <div id="employee-loan-queue-container" class="divide-y divide-outline-variant/20 border border-outline-variant/25 rounded-xl overflow-hidden bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading application queue...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. KYC VERIFICATION TAB (Section 12: Assigned, Status Filters, Action Workflow) -->
+        <div id="employee-panel-kyc" class="employee-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Assigned KYC Verification Queue</h3>
+                <p class="font-body-sm text-outline">Review customer identity proofs, verify tax credentials, and issue regulatory clearance.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <select id="employee-kyc-status-filter" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ASSIGNED_TO_ME" selected>Assigned to Me</option>
+                  <option value="ALL">All KYC Requests</option>
+                  <option value="PENDING">Pending Unassigned</option>
+                  <option value="NEEDS_REVIEW">Needs Review</option>
+                  <option value="APPROVED">Approved &amp; Verified</option>
+                  <option value="REJECTED">Rejected</option>
+                </select>
+                <button type="button" id="btn-refresh-employee-kyc" class="p-2 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-outline hover:text-on-surface">
+                  <span class="material-symbols-outlined text-[20px]">refresh</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="employee-kyc-container" class="divide-y divide-outline-variant/20 border border-outline-variant/25 rounded-xl overflow-hidden bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading KYC queue...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. CUSTOMER LOOKUP TAB -->
+        <div id="employee-panel-customers" class="employee-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Customer Directory &amp; Account Service</h3>
+                <p class="font-body-sm text-outline">Lookup customers by name, CIF/Customer ID, account number, PAN, or phone number.</p>
+              </div>
+              <div class="flex items-center gap-2 w-full sm:w-auto">
+                <input type="text" id="employee-customer-search-input" placeholder="Search customer, PAN, account..." class="px-3.5 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm w-full sm:w-64 focus:outline-none focus:border-primary-container" />
+                <button type="button" id="btn-employee-customer-search" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">
+                  Search
+                </button>
+              </div>
+            </div>
+
+            <div id="employee-customers-container" class="divide-y divide-outline-variant/20 border border-outline-variant/25 rounded-xl overflow-hidden bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Type a search query or click Search to view customers.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. LEDGER MONITOR TAB -->
+        <div id="employee-panel-ledger" class="employee-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Real-Time Core Banking Ledger</h3>
+                <p class="font-body-sm text-outline">Institutional transaction monitoring, audit verification, and compliance statement export.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="text" id="employee-ledger-search" placeholder="Search reference, recipient..." class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm text-sm" />
+                <select id="employee-ledger-category" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All Categories</option>
+                  <option value="TRANSFER">Transfer</option>
+                  <option value="SALARY">Salary</option>
+                  <option value="EMI_BILLS">EMI / Bills</option>
+                  <option value="SHOPPING">Shopping</option>
+                  <option value="OTHER">Other</option>
+                </select>
+                <button type="button" id="btn-employee-ledger-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold">Filter</button>
+                <button type="button" id="btn-employee-ledger-export" class="px-4 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-sm font-semibold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[18px]">download</span> Export CSV
+                </button>
+              </div>
+            </div>
+
+            <div id="employee-ledger-table-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading transaction ledger...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 12: ADMIN DASHBOARD (OPERATIONS & DBMS OVERSIGHT)   -->
+      <!-- ======================================================== -->
+      <div id="view-admin-portal" class="app-view hidden flex flex-col w-full pb-16 max-w-[1400px]">
+        <div class="pt-6 pb-6 border-b border-outline-variant/30 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-inverse-surface text-inverse-on-surface font-label-sm font-semibold">DBMS Manager</span>
+              <span class="font-label-sm text-outline">Finova Silk &amp; Glass Core Banking Management Console</span>
+            </div>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight pt-1">Administrative Oversight &amp; Database Controls</h1>
+          </div>
+
+          <!-- Admin Subtabs (Section 18 Reorganized) -->
+          <div class="flex items-center gap-1 bg-surface-container-low p-1.5 rounded-2xl border border-outline-variant/20 overflow-x-auto">
+            <button type="button" class="admin-tab-btn active px-3.5 py-2 rounded-xl font-label-sm font-semibold text-primary-container bg-surface-container-lowest shadow-sm transition-all whitespace-nowrap" data-tab="metrics">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">analytics</span>Overview
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="customers">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">people</span>Customers
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="accounts">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">manage_accounts</span>Accounts
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="transactions">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">receipt_long</span>Transactions
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="loans">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">real_estate_agent</span>Loans
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="kyc">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">verified_user</span>KYC
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="employees">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">badge</span>Employees
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="branches">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">hub</span>Branches
+            </button>
+            <button type="button" class="admin-tab-btn px-3.5 py-2 rounded-xl font-label-sm font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap" data-tab="audit">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">history_edu</span>Audit Logs
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. SYSTEM OVERVIEW TAB -->
+        <div id="admin-panel-metrics" class="admin-tab-panel pt-6 space-y-6">
+          <!-- Metrics Grid -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass-card p-5 rounded-2xl">
+              <span class="font-label-sm text-outline">Total Customers</span>
+              <p id="admin-stat-customers" class="font-financial-numeric text-2xl font-bold text-on-surface pt-1">--</p>
+              <p class="font-label-sm text-outline pt-0.5" id="admin-stat-kyc-pending">Pending KYC: --</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+              <span class="font-label-sm text-outline">Customer Accounts</span>
+              <p id="admin-stat-accounts" class="font-financial-numeric text-2xl font-bold text-on-surface pt-1">--</p>
+              <p class="font-label-sm text-outline pt-0.5" id="admin-stat-accounts-sub">Active: -- · Frozen: --</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+              <span class="font-label-sm text-outline">Aggregate Vault Deposits</span>
+              <p id="admin-stat-deposits" class="font-financial-numeric text-2xl font-bold text-secondary pt-1">₹--</p>
+              <p class="font-label-sm text-outline pt-0.5" id="admin-stat-withdrawals">Total Outflows: ₹--</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+              <span class="font-label-sm text-outline">Total Credit Outstanding</span>
+              <p id="admin-stat-loans" class="font-financial-numeric text-2xl font-bold text-primary-container pt-1">₹--</p>
+              <p class="font-label-sm text-outline pt-0.5" id="admin-stat-loans-sub">Active Facilities: -- · Queue: --</p>
+            </div>
+          </div>
+
+          <!-- Secondary Metrics -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="glass-card p-5 rounded-2xl flex items-center justify-between">
+              <div>
+                <span class="font-label-sm text-outline">Cumulative Ledger Volume</span>
+                <p id="admin-stat-volume" class="font-financial-numeric text-xl font-bold text-on-surface pt-0.5">₹--</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center">
+                <span class="material-symbols-outlined">payments</span>
+              </div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl flex items-center justify-between">
+              <div>
+                <span class="font-label-sm text-outline">Transaction Integrity</span>
+                <p id="admin-stat-txn-count" class="font-financial-numeric text-xl font-bold text-on-surface pt-0.5">-- Txns (0 Failed)</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined">verified</span>
+              </div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl flex items-center justify-between">
+              <div>
+                <span class="font-label-sm text-outline">Branch Operating Network</span>
+                <p id="admin-stat-branches" class="font-financial-numeric text-xl font-bold text-on-surface pt-0.5">-- Active Branches</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-800 flex items-center justify-center">
+                <span class="material-symbols-outlined">hub</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Architecture Highlight -->
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="font-headline-sm font-semibold text-on-surface mb-3">Database Management Engine Highlights</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm font-body-sm">
+              <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
+                <strong class="block text-on-surface font-semibold">ACID Compliance</strong>
+                <span class="text-outline">Pessimistic row locking via <code>select_for_update()</code> prevents overdraft and race conditions.</span>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
+                <strong class="block text-on-surface font-semibold">3NF Normalization</strong>
+                <span class="text-outline">Normalized entities eliminate data anomalies across users, customers, accounts, and ledger.</span>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
+                <strong class="block text-on-surface font-semibold">Check Constraints</strong>
+                <span class="text-outline">Database-level SQL CHECK guarantees positive balances and non-zero transfer amounts.</span>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
+                <strong class="block text-on-surface font-semibold">Immutable Audit Trail</strong>
+                <span class="text-outline">Every security, balance, and authorization mutation writes permanent regulatory logs.</span>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- 2. CUSTOMERS DIRECTORY TAB (Section 18 & 19) -->
+        <div id="admin-panel-customers" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Customer Directory &amp; Relationship Management</h3>
+                <p class="font-body-sm text-outline">Search retail banking customers, review CIF identifiers, inspect credit profiles and connected accounts.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="text" id="admin-customers-search" placeholder="Search customer name, CIF, PAN..." class="px-3.5 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm w-60 focus:outline-none focus:border-primary-container" />
+                <select id="admin-customers-kyc-filter" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All KYC Statuses</option>
+                  <option value="VERIFIED">Verified Only</option>
+                  <option value="PENDING">Pending Verification</option>
+                  <option value="NEEDS_REVIEW">Needs Review</option>
+                  <option value="REJECTED">Rejected</option>
+                </select>
+                <button type="button" id="btn-admin-customers-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Search</button>
+              </div>
+            </div>
+
+            <div id="admin-customers-table-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading customers...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. CUSTOMER ACCOUNTS TAB -->
+        <div id="admin-panel-accounts" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Customer &amp; Account Management</h3>
+                <p class="font-body-sm text-outline">Inspect customer accounts, view available balances, and execute administrative freeze/unfreeze controls.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="text" id="admin-accounts-search" placeholder="Search account, customer, PAN..." class="px-3.5 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm w-56 focus:outline-none focus:border-primary-container" />
+                <select id="admin-accounts-status" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All Statuses</option>
+                  <option value="ACTIVE">Active Only</option>
+                  <option value="FROZEN">Frozen Only</option>
+                  <option value="CLOSED">Closed Only</option>
+                </select>
+                <button type="button" id="btn-admin-accounts-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Filter</button>
+              </div>
+            </div>
+
+            <div id="admin-accounts-table-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading customer accounts...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. TRANSACTION OVERSIGHT TAB -->
+        <div id="admin-panel-transactions" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Institutional Transaction Oversight</h3>
+                <p class="font-body-sm text-outline">Full system ledger view with search, status filtering, and atomic transaction reversal facility.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="text" id="admin-txn-search" placeholder="Txn ID, reference, customer..." class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm text-sm" />
+                <select id="admin-txn-status" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All Statuses</option>
+                  <option value="COMPLETED">Completed</option>
+                  <option value="REVERSED">Reversed</option>
+                  <option value="FAILED">Failed</option>
+                </select>
+                <button type="button" id="btn-admin-txn-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Filter</button>
+              </div>
+            </div>
+
+            <div id="admin-txn-table-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading transactions...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. CREDIT FACILITIES TAB -->
+        <div id="admin-panel-loans" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Credit Facilities Management</h3>
+                <p class="font-body-sm text-outline">Audit active loans, monitor repayment health, and inspect amortization schedules.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <select id="admin-loans-status" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All Facilities</option>
+                  <option value="ACTIVE" selected>Active</option>
+                  <option value="UNDER_REVIEW">Under Review / Suspended</option>
+                  <option value="CLOSED">Closed / Repaid</option>
+                  <option value="DEFAULTED">Defaulted</option>
+                </select>
+                <button type="button" id="btn-admin-loans-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Filter</button>
+              </div>
+            </div>
+
+            <div id="admin-loans-table-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading credit facilities...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. KYC OVERSIGHT TAB (Sections 18, 19, 20) -->
+        <div id="admin-panel-kyc" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Institutional KYC &amp; Verification Oversight</h3>
+                <p class="font-body-sm text-outline">Real-time supervision of compliance verification queue, officer workload distribution, and audit decisions.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="text" id="admin-kyc-search" placeholder="Search customer, ID, or loan..." class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm text-sm" />
+                <select id="admin-kyc-status" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All KYC Statuses</option>
+                  <option value="PENDING">Pending</option>
+                  <option value="ASSIGNED">Assigned to Officer</option>
+                  <option value="NEEDS_REVIEW">Needs Review</option>
+                  <option value="APPROVED">Approved</option>
+                  <option value="REJECTED">Rejected</option>
+                </select>
+                <button type="button" id="btn-admin-kyc-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Filter</button>
+              </div>
+            </div>
+
+            <div id="admin-kyc-table-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading KYC requests...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. EMPLOYEES & WORKLOAD TAB (Sections 18, 19, 20) -->
+        <div id="admin-panel-employees" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Banking Staff &amp; Operational Workload</h3>
+                <p class="font-body-sm text-outline">Manage active bank employees, underwriting specialists, branch affiliations, and real-time workload allocation.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" id="admin-employees-search" placeholder="Search staff name, ID, or role..." class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm text-sm" />
+                <button type="button" id="btn-admin-employees-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Search</button>
+              </div>
+            </div>
+
+            <div id="admin-employees-table-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading banking staff...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. AUDIT LOG TAB -->
+        <div id="admin-panel-audit" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Immutable Regulatory Audit Trail</h3>
+                <p class="font-body-sm text-outline">Chronological compliance records tracking actors, timestamps, IPs, and operational actions.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="text" id="admin-audit-search" placeholder="Filter by user or details..." class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm text-sm" />
+                <select id="admin-audit-action" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All Actions</option>
+                  <option value="MONEY_TRANSFER">Transfers</option>
+                  <option value="TRANSACTION_REVERSED">Reversals</option>
+                  <option value="ACCOUNT_">Account Actions</option>
+                  <option value="LOAN_">Loan Actions</option>
+                  <option value="KYC_">KYC Actions</option>
+                  <option value="BRANCH_">Branch Actions</option>
+                </select>
+                <button type="button" id="btn-admin-audit-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Filter</button>
+              </div>
+            </div>
+
+            <div id="admin-audit-logs-container" class="border border-outline-variant/25 rounded-xl overflow-x-auto bg-surface-container-lowest">
+              <div class="p-8 text-center text-outline">Loading audit logs...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. BRANCH FACILITIES TAB -->
+        <div id="admin-panel-branches" class="admin-tab-panel pt-6 space-y-6 hidden">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+              <div>
+                <h3 class="font-headline-sm font-semibold text-on-surface">Physical Branch Network &amp; Facilities</h3>
+                <p class="font-body-sm text-outline">Manage physical branch locations, IFSC codes, branch managers, customer/staff allocation, and daily transaction volume.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="text" id="admin-branches-search" placeholder="Search branch, IFSC, city..." class="px-3.5 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-body-sm w-56 focus:outline-none focus:border-primary-container" />
+                <select id="admin-branches-status" class="px-3 py-1.5 rounded-xl border border-outline-variant/30 text-on-surface bg-surface-container-lowest font-label-sm">
+                  <option value="ALL">All Branches</option>
+                  <option value="ACTIVE">Active Only</option>
+                  <option value="INACTIVE">Inactive Only</option>
+                </select>
+                <button type="button" id="btn-admin-branches-filter" class="px-4 py-1.5 rounded-xl bg-primary-container text-white font-label-sm font-semibold hover:bg-primary transition-colors">Filter</button>
+                <button type="button" id="btn-admin-add-branch" class="px-4 py-1.5 rounded-xl bg-surface-container-high text-on-surface font-label-sm font-semibold hover:bg-surface-container-highest transition-colors flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">add</span> Register Branch
+                </button>
+              </div>
+            </div>
+
+            <div id="admin-branches-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="p-8 text-center text-outline col-span-3">Loading branches...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MODALS: ACTION REASON PROMPT MODAL -->
+      <div id="modal-action-prompt" class="fixed inset-0 z-50 flex items-center justify-center bg-surface/85 backdrop-blur-md p-4 hidden">
+        <div class="glass-card max-w-md w-full p-6 rounded-3xl shadow-2xl border border-outline-variant/30 flex flex-col space-y-4">
+          <div class="flex items-center gap-3">
+            <div id="prompt-modal-icon-box" class="w-10 h-10 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[22px]" id="prompt-modal-icon">verified_user</span>
+            </div>
+            <div>
+              <h3 class="font-headline-sm font-bold text-on-surface" id="prompt-modal-title">Action Title</h3>
+              <p class="font-label-sm text-outline" id="prompt-modal-subtitle">Target reference</p>
+            </div>
+          </div>
+          <p class="font-body-sm text-on-surface-variant" id="prompt-modal-desc">Description of the action and compliance requirement.</p>
+          <div id="prompt-modal-input-group" class="flex flex-col gap-1.5">
+            <label class="font-label-sm font-medium text-on-surface-variant" id="prompt-modal-input-label">Justification / Reason:</label>
+            <textarea id="prompt-modal-textarea" rows="3" placeholder="Enter reason..." class="w-full p-3 rounded-xl border border-outline-variant/30 bg-surface-container-lowest text-on-surface font-body-sm focus:outline-none focus:border-primary-container"></textarea>
+          </div>
+          <div class="flex justify-end gap-2.5 pt-2">
+            <button type="button" id="btn-prompt-modal-cancel" class="px-4 py-2 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md font-semibold transition-colors">
+              Cancel
+            </button>
+            <button type="button" id="btn-prompt-modal-confirm" class="px-5 py-2 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-colors">
+              Confirm Action
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODALS: GENERIC DETAIL MODAL (TRANSACTIONS / LOANS / CUSTOMERS) -->
+      <div id="modal-generic-detail" class="fixed inset-0 z-50 flex items-center justify-center bg-surface/85 backdrop-blur-md p-4 hidden">
+        <div class="glass-card max-w-2xl w-full p-6 rounded-3xl shadow-2xl border border-outline-variant/30 flex flex-col space-y-4 max-h-[90vh] overflow-y-auto">
+          <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-primary-container text-[24px]" id="generic-detail-icon">info</span>
+              <h3 class="font-headline-sm font-bold text-on-surface" id="generic-detail-title">Record Details</h3>
+            </div>
+            <button type="button" id="btn-generic-detail-close" class="p-1 rounded-lg text-outline hover:text-on-surface">
+              <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+          </div>
+          <div id="generic-detail-content" class="space-y-4 font-body-sm">
+            <!-- Dynamic Content -->
+          </div>
+        </div>
+      </div>
+
+      <!-- MODALS: BRANCH FORM MODAL -->
+      <div id="modal-branch-form" class="fixed inset-0 z-50 flex items-center justify-center bg-surface/85 backdrop-blur-md p-4 hidden">
+        <div class="glass-card max-w-lg w-full p-6 rounded-3xl shadow-2xl border border-outline-variant/30 flex flex-col space-y-4">
+          <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+            <h3 class="font-headline-sm font-bold text-on-surface" id="branch-modal-title">Register Bank Branch</h3>
+            <button type="button" id="btn-branch-form-close" class="p-1 rounded-lg text-outline hover:text-on-surface">
+              <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+          </div>
+          <form id="form-branch-edit" class="space-y-3 font-body-sm">
+            <input type="hidden" id="branch-form-id" value="" />
+            <div>
+              <label class="font-label-sm font-medium text-on-surface-variant">Branch Code</label>
+              <input type="text" id="branch-form-code" placeholder="e.g. BLR02" required class="w-full p-2.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest text-on-surface font-body-sm uppercase" />
+            </div>
+            <div>
+              <label class="font-label-sm font-medium text-on-surface-variant">Branch Name</label>
+              <input type="text" id="branch-form-name" placeholder="e.g. Bengaluru Whitefield" required class="w-full p-2.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest text-on-surface font-body-sm" />
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="font-label-sm font-medium text-on-surface-variant">IFSC</label>
+                <input type="text" id="branch-form-ifsc" placeholder="FINO0001234" required class="w-full p-2.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest text-on-surface font-body-sm uppercase" />
+              </div>
+              <div>
+                <label class="font-label-sm font-medium text-on-surface-variant">City</label>
+                <input type="text" id="branch-form-city" placeholder="Bengaluru" required class="w-full p-2.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest text-on-surface font-body-sm" />
+              </div>
+            </div>
+            <div>
+              <label class="font-label-sm font-medium text-on-surface-variant">Manager Name</label>
+              <input type="text" id="branch-form-manager" placeholder="Full Name" required class="w-full p-2.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest text-on-surface font-body-sm" />
+            </div>
+            <div>
+              <label class="font-label-sm font-medium text-on-surface-variant">Address</label>
+              <input type="text" id="branch-form-address" placeholder="Physical Address" required class="w-full p-2.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest text-on-surface font-body-sm" />
+            </div>
+            <div class="flex justify-end gap-2.5 pt-3">
+              <button type="button" id="btn-branch-form-cancel" class="px-4 py-2 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md font-semibold">Cancel</button>
+              <button type="submit" class="px-5 py-2 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary">Save Branch</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </main>
+  </div>
+
+  <!-- AUTHENTICATION & LOGIN SCREEN OVERLAY -->
+  <div id="modal-auth-login" class="fixed inset-0 z-50 flex items-center justify-center bg-surface/85 backdrop-blur-2xl p-4 hidden">
+    <div class="glass-card max-w-md w-full p-8 rounded-3xl shadow-2xl border border-outline-variant/30 flex flex-col space-y-6">
+      <!-- Header -->
+      <div class="flex flex-col items-center text-center">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary/20 mb-3">
+          <span class="material-symbols-outlined text-[32px] text-white">account_balance</span>
+        </div>
+        <h2 class="font-headline-md font-bold text-on-surface">Finova Banking</h2>
+        <p class="font-label-sm text-outline pt-0.5">Silk &amp; Glass Core Banking &amp; Loan Management</p>
+      </div>
+
+      <!-- Demo Persona Quick-Fill -->
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="font-label-sm text-outline font-medium">Select Demo Persona:</span>
+          <div class="inline-flex p-0.5 rounded-lg bg-surface-container gap-1 text-[11px] font-semibold">
+            <button type="button" class="persona-cat-btn px-2.5 py-1 rounded-md bg-surface-container-lowest text-primary-container shadow-xs transition-colors" data-cat="customers">Customers (5)</button>
+            <button type="button" class="persona-cat-btn px-2.5 py-1 rounded-md text-outline hover:text-on-surface transition-colors" data-cat="employees">Staff (2)</button>
+            <button type="button" class="persona-cat-btn px-2.5 py-1 rounded-md text-outline hover:text-on-surface transition-colors" data-cat="admin">Admin (1)</button>
+          </div>
+        </div>
+
+        <!-- Customer Personas Grid -->
+        <div id="persona-grid-customers" class="grid grid-cols-2 gap-2">
+          <button type="button" class="btn-quick-login-persona p-2.5 rounded-xl border border-primary/40 bg-primary/5 hover:bg-primary/10 transition-colors text-left flex flex-col" data-username="sophia" data-password="Finova@2024" data-role="CUSTOMER">
+            <span class="font-label-sm font-semibold text-on-surface">Sophia Mehta</span>
+            <span class="text-[10px] text-outline">Premier · ₹1.28L · Home Loan</span>
+          </button>
+          <button type="button" class="btn-quick-login-persona p-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-left flex flex-col" data-username="rohan" data-password="Finova@2024" data-role="CUSTOMER">
+            <span class="font-label-sm font-semibold text-on-surface">Rohan Deshmukh</span>
+            <span class="text-[10px] text-outline">Retail · ₹35.1K · Savings</span>
+          </button>
+          <button type="button" class="btn-quick-login-persona p-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-left flex flex-col" data-username="aarav" data-password="Finova@2024" data-role="CUSTOMER">
+            <span class="font-label-sm font-semibold text-on-surface">Aarav Sharma</span>
+            <span class="text-[10px] text-outline">Premier · ₹2.40L · Personal Loan</span>
+          </button>
+          <button type="button" class="btn-quick-login-persona p-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-left flex flex-col" data-username="priya" data-password="Finova@2024" data-role="CUSTOMER">
+            <span class="font-label-sm font-semibold text-on-surface">Priya Patel</span>
+            <span class="text-[10px] text-outline">Healthcare · ₹64.2K · Applicant</span>
+          </button>
+          <button type="button" class="btn-quick-login-persona p-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-left flex flex-col col-span-2" data-username="vikram" data-password="Finova@2024" data-role="CUSTOMER">
+            <span class="font-label-sm font-semibold text-on-surface">Vikram Malhotra</span>
+            <span class="text-[10px] text-outline">Commercial Retail · ₹1.04L · KYC Review</span>
+          </button>
+        </div>
+
+        <!-- Employee Personas Grid (Hidden by default) -->
+        <div id="persona-grid-employees" class="grid grid-cols-2 gap-2 hidden">
+          <button type="button" class="btn-quick-login-persona p-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-left flex flex-col" data-username="employee" data-password="Finova@2024" data-role="EMPLOYEE">
+            <span class="font-label-sm font-semibold text-on-surface">Ramesh Iyer</span>
+            <span class="text-[10px] text-outline">Senior Underwriter · BLR</span>
+          </button>
+          <button type="button" class="btn-quick-login-persona p-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-left flex flex-col" data-username="employee2" data-password="Finova@2024" data-role="EMPLOYEE">
+            <span class="font-label-sm font-semibold text-on-surface">Ananya Rao</span>
+            <span class="text-[10px] text-outline">KYC Officer · MUM</span>
+          </button>
+        </div>
+
+        <!-- Admin Persona Grid (Hidden by default) -->
+        <div id="persona-grid-admin" class="hidden">
+          <button type="button" class="btn-quick-login-persona w-full p-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors text-left flex flex-col" data-username="admin" data-password="FinovaAdmin@2024" data-role="ADMIN">
+            <span class="font-label-sm font-semibold text-on-surface">System Administrator</span>
+            <span class="text-[10px] text-outline">Full DBMS Management, Oversight &amp; Regulatory Audit Trail</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="form-auth-login" class="space-y-4">
+        <div id="login-error-container" class="hidden p-3 rounded-xl bg-error-container/40 text-error font-label-sm border border-error/20 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">error</span>
+          <span id="login-error-text">Invalid credentials</span>
+        </div>
+
+        <div>
+          <label for="login-username" class="block font-label-sm font-semibold text-on-surface mb-1">Username / Client ID</label>
+          <input id="login-username" type="text" required class="w-full px-4 py-2.5 rounded-xl border border-outline-variant/40 bg-surface-container-lowest text-on-surface font-body-sm focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" placeholder="e.g. sophia"/>
+        </div>
+
+        <div>
+          <label for="login-password" class="block font-label-sm font-semibold text-on-surface mb-1">Password</label>
+          <input id="login-password" type="password" required class="w-full px-4 py-2.5 rounded-xl border border-outline-variant/40 bg-surface-container-lowest text-on-surface font-body-sm focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" placeholder="Enter password"/>
+        </div>
+
+        <button id="btn-login-submit" type="submit" class="w-full py-3 rounded-xl bg-primary-container text-white font-label-md font-semibold hover:bg-primary transition-all duration-150 shadow-md inline-flex items-center justify-center gap-2">
+          <span>Sign In to Finova</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </button>
+      </form>
+
+      <!-- Academic Notice -->
+      <p class="font-label-sm text-outline text-center text-[12px] pt-1 border-t border-outline-variant/20">
+        College DBMS Academic Project · Local SQLite ACID Simulation
+      </p>
+    </div>
+  </div>
+
+  <!-- Client-Side API & Interaction Scripts -->
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script>
+    if (typeof window.ApiService === 'undefined') {
+      document.write('<script src="js/api.js"><\/script><script src="js/app.js"><\/script>');
+    }
+  </script>
+</body>
+</html>
